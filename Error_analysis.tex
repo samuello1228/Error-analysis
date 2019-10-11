@@ -1,0 +1,269 @@
+\documentclass[12pt,a4paper]{report}
+%\documentstyle[epsfig]{article}
+\textheight=700pt
+\textwidth=510pt
+\oddsidemargin=-30pt
+\topmargin=-35pt
+\usepackage{graphicx,wrapfig,epstopdf}
+\usepackage[nottoc]{tocbibind}
+\usepackage[]{amsmath}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{textgreek}
+\usepackage{csquotes}
+\usepackage{titlesec}
+\usepackage{breqn}
+\usepackage{hyperref}
+\setcounter{chapter}{1}
+
+\begin{document}
+\begin{center}
+{\bf Advanced Lab's course} \\ %\vspace{2mm}
+Introduction to Statistical Analysis \\
+and Error Analysis \\
+\end{center}
+
+
+\section{Aim of the lab}
+This lab allows students to meet several goals:
+\begin{enumerate}
+\item Introduction to error analysis and statistical analysis of the data
+\item Introduction to basics of analysis and simulations with \textbf{Matlab} (or any other software used to data analysis)
+\item Performance of basic measurements of data with low are large statistics
+\end{enumerate}
+
+
+\section{Introduction}
+Data analysis and statistical methods play essential role in science as it is a tool which gives possibility to treat uncertainties to data and draw conclusions. For experimental physics, it is also a tool to design and plan an experiment. Statistical methods of data analysis allow to identify independent and depended variables in the system, decide which model (theory) should be chosen for data description and etc. This laboratory manual is aimed to give students a brief introduction to data analysis techniques, however it is highly recommended to read further literature \cite{stat_1, stat_2, stat_3}.
+
+
+\section{Elements of probability theory: distribution, moments of distribution, types of distribution}
+During the experiment one deals with stochastic processes, during which each next trial is independent on previous result. Random processes are described by the \textit{probability density} function $P(x)$ (term \textit{distribution} function is also used). Depending on the nature of variable \enquote{x}, distribution $P(x)$ can be continuous or discrete. If variable \enquote{x} is discrete, than the probability to obtain \enquote{$x_i$} equals to $P(x_i)$. If variable \enquote{x} is continuous, than the probability to obtain \enquote{x} in the region from $x$ to $x+dx$ equals to $P(x)dx$. \\
+Usually, distribution probability is normalised to 1. In case of continuous distribution:
+\begin{equation} \label{norm_P_1}
+\int_{-\infty}^{+\infty} P(x)dx = 1
+\end{equation}
+In case of discrete distribution:
+\begin{equation} \label{norm_P_2}
+\sum_{i} P(x_i) = 1
+\end{equation}
+The probability $p(x)$ to find $x$ between certain values in case of continuous distribution is defined in the following way:
+\begin{equation} \label{prob_find_1}
+p(x_1 \leq x \leq x_2) = \int_{x_1}^{x_2} P(x)dx
+\end{equation}
+In case of discrete distribution, integration should be replaced with summation:
+\begin{equation} \label{prob_find_2}
+p(x_1 \leq x \leq x_2) = \sum_{x = x_1}^{x_2} P(x)
+\end{equation}
+
+\subsection{Moments of distribution}
+Theoretical mean value $\mu$ of variable $x$ is defined as the first moment about zero of the distribution $P(x)$. Mathematically it can be expressed in the following way:
+\begin{equation} \label{first_moment}
+\mu = \int x P(x) dx
+\end{equation}
+The variance of the distribution $\sigma^2$ is defined as a second moment about the mean value:
+\begin{equation} \label{second_moment}
+\sigma^2 = \int (x-\mu)^2P(x)dx
+\end{equation}
+It has a meaning of average squared deviation of variable \enquote{x} from its mean value $\mu$. Square root of variance, $\sigma$, is called standard deviation, and used to describe the width of the distribution. Value of $\sigma$ allows to judge about the magnitude of fluctuation of random variable \enquote{x} around its mean value $\sigma$. Also one can introduce higher moments of distribution, but they are rarely used in experimental physics. In case of discrete distributions, integration in equations (\ref{first_moment}, \ref{second_moment}) should be changed to summation. Students are welcome to study literature for more information about it \cite{stat_1, stat_2, stat_3}. \\
+The correlation (dependency) between parameters $x$ and $y$ is described by covariance:
+\begin{equation} \label{cov}
+cov(x,y) = \int (x-\mu_x)(y-\mu_y)P(x,y)dxdy
+\end{equation}
+where $P(x,y)$ is a 2-dimensional distribution of variables \enquote{x} and \enquote{y}. It is also convenient to introduce correlation coefficient $\rho$ ($\rho \in [-1; 1]$):
+\begin{equation} \label{rho}
+\rho = \frac{cov(x,y)}{\sigma_x \sigma_y}
+\end{equation}
+The value of $\rho$ gives information about the dependency between parameters. If $|\rho| = 1$, than it is a case of perfect linear correlation. If $\rho = 0$ - variables are independent.
+
+\subsection{Types of distributions: Binomial, Poisson, Gaussian} 
+\textbf{The Binomial distribution} describes processes in which outcome of a trial is dichotomous (\textit{yes} or \textit{no}, \textit{head} or \textit{tail} and etc.). The probability of $r$ positive (or negative) outcomes in $N$ trials is calculated in the following way:
+\begin{equation} \label{binom_dist}
+P(r) = \frac{N!}{r! (N-r)!}p^r (1-p)^{N-r}
+\end{equation}
+where p is the probability of success (or failure) of one single trial. Examples of binomial distribution can be found in Fig.~\ref{fig:Binom}. It is easy to see, that binomial distribution is discrete. Theoretical mean value $\mu$ equals to:
+\begin{equation} \label{binom_mean_val}
+\mu = \sum_r r P(r) = Np
+\end{equation}
+The variance of the distribution equals to:
+\begin{equation} \label{binom_var}
+\sigma^2 = \sum_r (r-\mu)^2P(r) = Np(1-p)
+\end{equation}
+Binomial distribution can be approximated with Poisson or Gaussian distributions, depending on the parameters. 
+\begin{figure}[!h]
+\begin{center}
+\includegraphics*[scale = 0.5]{Figures/Binom}
+\caption{\label{fig:Binom} Examples of binomial distribution with different parameter \enquote{$p$}. Details can be found in the legend.}
+\end{center}
+\end{figure}
+\newpage
+\textbf{The Poisson distribution} rises as a limit case of Binomial distribution, when the following conditions are satisfied:
+\begin{enumerate}
+\item Events are independent within any time interval.
+\item Probability of one event $p \rightarrow 0$, while the amount of trials $N \rightarrow \infty$. 
+\item Mean value $\mu = Np$ stays finite.
+\end{enumerate}
+Probability to observe $r$ events under the conditions listed above is calculated in the following way:
+\begin{equation} \label{poisson_dist}
+P(r) = \frac{\mu^r e^{-\mu}}{r!}
+\end{equation}
+Poisson distribution has many examples in every day life. For example, radioactive decay of $^{238}$U isotope. This nuclei is an alpha-decayer with $T_{1/2} \approx 4.5 \times 10^9$ years. From laws of nuclear physics, it is knows, that nuclei act independently from each other during radioactive decay. The probability of one uranium nucleus to decay is $\lambda = \ln2 /T_{1/2} \approx 5 \times 10^{-18}$ s$^{-1}$. As one can see, probability of a single event is very small. But, suppose, that we have 1 g of $^{238}$U, which contains $N \approx 2.5 \times 10^{21}$ isotopes. The mean value remains constant in time and equals to $\mu = Np \approx 12.5 \times 10^3$ decays/s. \par 
+\begin{figure}[!h]
+\begin{center}
+\includegraphics*[scale = 0.4]{Figures/Poisson}
+\caption{\label{fig:Poisson} Examples of Poisson distribution with different parameter $\mu$. Details can be found in the legend.}
+\end{center}
+\end{figure}
+Poisson distribution is discrete and has only one parameter $\mu$, which stands for the mean value. It can be shown, that variance of the distributions equals to:
+\begin{equation}
+\sigma^2 = \mu 
+\end{equation}
+On Fig.~\ref{fig:Poisson} one can find several examples of Poisson distribution with different values of $\mu$. As it is seen, with small values of $\mu$, Poisson distribution is asymmetric. But with relatively large values of $\mu$ distributions becomes symmetric and can be approximated by the Gaussian distribution. During such approximation the discrete nature of Poisson distribution should be neglected.  \par 
+\textbf{The Gaussian or normal distribution} is one of the most important distributions in statistics and for data analysis in particular. As it was mentioned above, binomial and Poisson distributions can be approximated by Gaussian one. Also, it is known from central limit theorem (CLT), that if a set of independent random variables (even with distributions different from normal) are added, their sum will tend to normal distribution. On practice it means, that many processes can be approximated with Gaussian distribution. For example, instrumental errors are generally distributed normally.
+The Gaussian distribution is a symmetric, continuous distribution, with density given by:
+\begin{equation} \label{gauss_dist}
+P(x) = \frac{1}{\sigma \sqrt{2\pi}}exp\Big ( - \frac{(x-\mu)^2}{2\sigma^2} \Big )
+\end{equation}
+It is dependent of two parameters: mean value $\mu$ and standard deviation $\sigma$. Example of Gaussian distribution can be found in Fig.~\ref{fig:Gaussian}. Parameter $\sigma$ characterises the width of Gaussian distribution. It is also common to use another parameter to describe the width - full width of half maximum (FWHM). It can be shown, that:
+\begin{equation} \label{FWHM}
+\text{FWHM} = 2 \sqrt{2\ln 2}\sigma \approx 2.35 \sigma
+\end{equation}
+\begin{figure}[!t]
+\begin{center}
+\includegraphics*[scale = 0.4]{Figures/Gauss}
+\caption{\label{fig:Gaussian} Examples of Gaussian distribution with different parameters $\sigma$. Details can be found in the legend.}
+\end{center}
+\end{figure}
+\begin{figure}[!t]
+\begin{center}
+\includegraphics*[scale = 0.3]{Figures/Gauss_intervals}
+\caption{\label{fig:Gauss_intervals} Area under Gaussian distribution, contained between different intervals. Figure is taken from \cite{stat_2}.}
+\end{center}
+\end{figure}
+Another important feature of normal distribution is the area under it, depending on the intervals. Example can be found in Fig.~\ref{fig:Gauss_intervals}. The area in the interval $[\mu-\sigma;\mu+\sigma]$ equals to $\approx 68\%$, from the maximum on. For the interval $\pm 2\sigma$ - $95.5\%$, and $\pm 3\sigma$ - $99.7\%$. This result is very important for data representation and means, that if one will present experimental results within only 1$\sigma$, than there is a probability of approximately 1/3, that the true value will be outside the region. If results are presented with 2$\sigma$ interval, this probability is less, then 5\%.
+
+
+
+\section{Statistical methods in experimental physics} \label{methods}
+
+In general case, average value of a sample $x \in [x_1, x_2, x_3, .... , x_n]$ is calculated in the following way:
+\begin{equation} \label{av_value}
+\bar{x} = \frac{1}{n} \sum{x_i}
+\end{equation}
+Standard deviation $\sigma_{\bar{x}}$ of the average value $\bar{x}$ is defined as following:
+\begin{equation} \label{standart_dev}
+\sigma_{\bar{x}} = \sqrt{\frac{1}{n(n-1)} \sum{(\bar{x}-x_i)^2}} 
+\end{equation}
+Standard deviation $\sigma_{\bar{x}}$ has a meaning of a statistical error and gives probability of 66$\%$, that the measured value x will be found in the region $\bar{x} - \sigma_{\bar{x}} \le x \le \bar{x} + \sigma_{\bar{x}}$. For confidence interval of $\alpha$ $\%$ standard deviation $\hat{\sigma}$ is written in the following way:
+\begin{equation} \label{standart_dev_big}
+\hat{\sigma} = t_{\alpha,n}\times \sigma_{\bar{x}}
+\end{equation}
+where $t_{\alpha,n}$ stands for student's coefficient. In physics and industry, confidence interval is usually taken as $\alpha = 95 \%$. It's value depend on the number of experimental points and can be found from the table~\ref{table:student_t_value}.
+\begin{table}[!h]
+\begin{center}
+\caption{\label{table:student_t_value} Values of student's $t$ coefficient for confidence interval $\alpha$=95$\%$.}
+\begin{tabular}{l l l l l l l l l}
+\hline
+n & 2 & 3 & 4 & 5 & 6 & 7-8 & 9-10 & 30-$\infty$  \\
+$t_{0.95, n}$ &12.7 & 4.3 & 3.2 & 2.8 & 2.6 & 2.4 & 2.3 & 2 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+During the experiment every quantity contains two types of error: statistical and systematical. Final result for value $x$ is written in the following way:
+\begin{equation} \label{final_value}
+x = \hat{x} \pm \sqrt{\hat{\sigma}_{stat}^2+\sigma^2_{syst}}
+\end{equation}
+ 
+\subsection{Propagation of Errors} \label{error_analysis}
+This section covers a method to estimate an $\sigma_{tot}$ of a function $f=f(x,y,z)$, when standard deviations $\sigma_x$, $\sigma_y$ and $\sigma_z$ are known. Here it is considered that variables $x, y, z$ are independent. It can be shown, that $\sigma_{tot}$ is expressed in the following way:
+\begin{equation} \label{error_propagation}
+\sigma_{tot} = \sqrt{\Big ( \frac{\partial f}{\partial x} \sigma_x \Big )^2+\Big ( \frac{\partial f}{\partial y} \sigma_y \Big )^2+\Big ( \frac{\partial f}{\partial z} \sigma_z \Big )^2}
+\end{equation} 
+In more general case, variables $x, y, z$ can be dependent. In this case covariances between parameters must be taken into account. Additional information on this case can be found in \cite{stat_1, stat_2, stat_3}.
+ 
+
+\section{Fitting methods}
+\subsection{Likelihood function method}
+
+\subsection{$\chi^2$ method}
+
+$\chi^2$ analysis \cite{stat_2, BAKER1984437, reduced_chi_squared} is based on minimising the difference between experimental data and the fitting function:
+
+\begin{equation} \label{chi_square_formula}
+\chi^2 = \sum_{j = 1}^{n} \Big ( \frac{y_j - F(E_j,\vec{\theta})}{\sigma_j} \Big )^2 
+\end{equation}
+
+where summation is taken over all experimental points. In formula \ref{chi_square_formula} $y_j$ stands for experimental data points, $\sigma_j$ - standard deviation (error) of experimental data, $F(x_j,\vec{\theta})$ - fitting function with a set of parameters $\vec{\theta}$. Parameters $\theta$ are found from the minimisation condition:
+
+\begin{equation} \label{chi_minimisation_condition}
+\frac{\partial \chi^2}{\partial \theta_j} = 0
+\end{equation}
+
+\subsection{Analysis of data in case of large statics}
+The technique, discussed at the beginning of section \ref{methods}, can be used always. But the case of large statistics of experimental data gives access to analyse the data via fitting. On Fig.~\ref{fig:radius_distribution} one can see the examples of the distribution of a radius for a particle and square displacement of a Brownian particle. Large statistics of data allows to build the distribution of a value $x$. Mean value $\bar{x}$ and standard deviation $\sigma_{\bar{x}}$ of mean value $\bar{x}$ are estimated from the fit of the distribution. According to Central limit theorem a set of independent random variables tends toward a normal (Gauss) distribution. On the Fig.~\ref{fig:radius_distribution} one can find distribution of the value of radius $r$ of Brownian particle and square displacement $\langle x^2 \rangle$.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics*[scale = 0.25]{Figures/two_plots}
+\caption{\label{fig:radius_distribution} Example of the distribution of a radius for a particle and square displacement of a Brownian particle. Data is generated using Gauss distribution in both cases.}
+\end{center}
+\end{figure}
+Final result with confidence interval of $\alpha = 66 \%$ is written in the following way:
+\begin{equation}
+x = \bar{x} \pm \sqrt{\sigma_{stat}+\sigma_{syst}}
+\end{equation}
+Final result with confidence interval of $\alpha = 95 \%$ is written in the following way:
+\begin{equation} \label{error_offline}
+x = \bar{x} \pm \sqrt{2\sigma_{stat}+\sigma_{syst}}
+\end{equation}
+
+
+
+\section{Experimental Setup and Procedure}
+Experimental equipment consists from following parts:
+\begin{enumerate}
+\item Standard micrometer
+\item Thin aluminium plate
+\end{enumerate}
+Below a student can find a list of \enquote{must-do} tasks, but students are highly motivated to expand to data analysis further:
+
+\begin{enumerate}
+\item Measure the thickness of a thin aluminium plate, using standard micrometer. Obtain data of large (200 points) and low (10 points) statistics. Estimate mean value (\ref{av_value}) and standard deviation (\ref{standart_dev}) for each case. Fit each data set with a distribution function, extract mean value and standard deviation from the fitting. Calculate $\chi^2$ (\ref{chi_square_formula}) for each case and define \enquote{goodness} of the fit. Present your results with 95$\%$ confidence level, taking into account statistical and systematical errors. 
+\item Simulate Landau distribution sitting on a background curve (exponential decay). Add statistical fluctuations and error bars (take as $\sqrt{N}$) to data points. Fit the data, estimate \enquote{goodness} of the fit, extract parameters of the distribution and compare them with the simulated values. Present your results with 95$\%$ confidence level, taking into account statistical and systematical errors.
+\item Simulate two Gaussian distributions party merging with each other, and sitting on the background curve (exponential decay). Simulate several cases with Gaussians of the same and different statistics, different widths of Gaussian distributions. Fit the data, estimate \enquote{goodness} of the fit, extract parameters of the distribution and compare them with the simulated values for each case. Present your results with 95$\%$ confidence level, taking into account statistical and systematical errors.
+\end{enumerate}
+
+\section{Discussion}
+To successfully pass the lab, a student must complete the following tasks:
+\begin{enumerate}
+\item What is the distribution function of the thickness of aluminium plate? How many parameters does it have? 
+\item In what cases does the $\chi^2$ analysis method can be used? Derive $\chi^2$ analysis method from maximum likelihood method.
+\item Other questions
+\end{enumerate}
+
+\medskip
+
+\begin{thebibliography}{99}
+
+\bibitem{stat_1}
+James F. (2008). Statistical Methods in Experimental Physics.
+
+\bibitem{stat_2}
+Leo W. R. (1994). Techniques for Nuclear and Particle Physics Experiments. p. 81
+
+\bibitem{stat_3}
+Taylor J. R. (1997). An Introduction to Error Analysis. 
+
+\bibitem{BAKER1984437}
+Steve Baker and Robert D. Cousins (1984). Clarification of the use of CHI-square and likelihood functions in fits to histograms. Nuclear Instruments and Methods in Physics Research, Volume 221, Issue 2, Pages 437 - 442 
+
+\bibitem{reduced_chi_squared}
+R. Andrae, T. Schulze-Hartung, P. Melchior (2010). Dos and don’ts of reduced chi-squared. arXiv:1012.3754v1. 
+
+\end{thebibliography}
+
+
+
+\end{document}
