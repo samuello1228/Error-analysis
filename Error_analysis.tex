@@ -29,17 +29,17 @@ and Error Analysis \\
 This lab allows students to meet several goals:
 \begin{enumerate}
 \item Introduction to error analysis and statistical analysis of the data
-\item Introduction to basics of analysis and simulations with \textbf{Matlab} (or any other software used to data analysis)
+\item Introduction to basics of analysis and simulations with \textbf{Matlab} (or any other software used to do data analysis)
 \item Performance of basic measurements of data with low are large statistics
 \end{enumerate}
 
 
 \section{Introduction}
-Data analysis and statistical methods play essential role in science as it is a tool which gives possibility to treat uncertainties to data and draw conclusions. For experimental physics, it is also a tool to design and plan an experiment. Statistical methods of data analysis allow to identify independent and depended variables in the system, decide which model (theory) should be chosen for data description and etc. This laboratory manual is aimed to give students a brief introduction to data analysis techniques, however it is highly recommended to read further literature \cite{stat_1, stat_2, stat_3}.
+Data analysis and statistical methods play an essential role in science as it is a tool which gives possibility to treat uncertainties to data and draw conclusions. For experimental physics, it is also a tool to design and plan an experiment. Statistical methods of data analysis allow to identify independent and depended variables in the system, decide which model (theory) should be chosen for data description and etc. This laboratory manual is aimed to give students a brief introduction to data analysis techniques, however it is highly recommended to read further literature \cite{stat_1, stat_2, stat_3}.
 
 
 \section{Elements of probability theory: distribution, moments of distribution, types of distribution}
-During the experiment one deals with stochastic processes, during which each next trial is independent on previous result. Random processes are described by the \textit{probability density} function $P(x)$ (term \textit{distribution} function is also used). Depending on the nature of variable \enquote{x}, distribution $P(x)$ can be continuous or discrete. If variable \enquote{x} is discrete, than the probability to obtain \enquote{$x_i$} equals to $P(x_i)$. If variable \enquote{x} is continuous, than the probability to obtain \enquote{x} in the region from $x$ to $x+dx$ equals to $P(x)dx$. \\
+During the experiment one deals with stochastic processes, during which each next trial is independent on previous result. Random processes are described by the \textit{probability density} function $P(x)$ (term \textit{distribution} function is also used). Depending on the nature of variable \enquote{x}, distribution $P(x)$ can be continuous or discrete. If variable \enquote{x} is discrete, then the probability to obtain \enquote{$x_i$} equals to $P(x_i)$. If variable \enquote{x} is continuous, then the probability to obtain \enquote{x} in the region from $x$ to $x+dx$ equals to $P(x)dx$. \\
 Usually, distribution probability is normalised to 1. In case of continuous distribution:
 \begin{equation} \label{norm_P_1}
 \int_{-\infty}^{+\infty} P(x)dx = 1
@@ -66,7 +66,14 @@ The variance of the distribution $\sigma^2$ is defined as a second moment about 
 \begin{equation} \label{second_moment}
 \sigma^2 = \int (x-\mu)^2P(x)dx
 \end{equation}
-It has a meaning of average squared deviation of variable \enquote{x} from its mean value $\mu$. Square root of variance, $\sigma$, is called standard deviation, and used to describe the width of the distribution. Value of $\sigma$ allows to judge about the magnitude of fluctuation of random variable \enquote{x} around its mean value $\sigma$. Also one can introduce higher moments of distribution, but they are rarely used in experimental physics. In case of discrete distributions, integration in equations (\ref{first_moment}, \ref{second_moment}) should be changed to summation. Students are welcome to study literature for more information about it \cite{stat_1, stat_2, stat_3}. \\
+It has a meaning of average squared deviation of variable \enquote{x} from its mean value $\mu$. Square root of variance, $\sigma$, is called standard deviation, and used to describe the width of the distribution. Value of $\sigma$ allows to judge about the magnitude of fluctuation of random variable \enquote{x} around its mean value $\sigma$. Also one can introduce higher moments of distribution, but they are rarely used in experimental physics. In case of discrete distributions, integration in equations (\ref{first_moment}, \ref{second_moment}) should be changed to summation.
+\begin{equation}
+\mu = \sum_i x_i P(x_i)
+\end{equation}
+\begin{equation}
+\sigma^2 = \sum_i (x_i-\mu)^2P(x_i)
+\end{equation}
+Students are welcome to study literature for more information about it \cite{stat_1, stat_2, stat_3}. \\
 The correlation (dependency) between parameters $x$ and $y$ is described by covariance:
 \begin{equation} \label{cov}
 cov(x,y) = \int (x-\mu_x)(y-\mu_y)P(x,y)dxdy
@@ -75,14 +82,14 @@ where $P(x,y)$ is a 2-dimensional distribution of variables \enquote{x} and \enq
 \begin{equation} \label{rho}
 \rho = \frac{cov(x,y)}{\sigma_x \sigma_y}
 \end{equation}
-The value of $\rho$ gives information about the dependency between parameters. If $|\rho| = 1$, than it is a case of perfect linear correlation. If $\rho = 0$ - variables are independent.
+The value of $\rho$ gives information about the dependency between parameters. If $|\rho| = 1$, then it is a case of perfect linear correlation. If $\rho = 0$, variables are independent.
 
 \subsection{Types of distributions: Binomial, Poisson, Gaussian} 
 \textbf{The Binomial distribution} describes processes in which outcome of a trial is dichotomous (\textit{yes} or \textit{no}, \textit{head} or \textit{tail} and etc.). The probability of $r$ positive (or negative) outcomes in $N$ trials is calculated in the following way:
 \begin{equation} \label{binom_dist}
 P(r) = \frac{N!}{r! (N-r)!}p^r (1-p)^{N-r}
 \end{equation}
-where p is the probability of success (or failure) of one single trial. Examples of binomial distribution can be found in Fig.~\ref{fig:Binom}. It is easy to see, that binomial distribution is discrete. Theoretical mean value $\mu$ equals to:
+where p is the probability of success (or failure) of one single trial. Examples of binomial distribution can be found in Fig.~\ref{fig:Binom}. It is easy to see that binomial distribution is discrete. Theoretical mean value $\mu$ equals to:
 \begin{equation} \label{binom_mean_val}
 \mu = \sum_r r P(r) = Np
 \end{equation}
@@ -108,7 +115,7 @@ Probability to observe $r$ events under the conditions listed above is calculate
 \begin{equation} \label{poisson_dist}
 P(r) = \frac{\mu^r e^{-\mu}}{r!}
 \end{equation}
-Poisson distribution has many examples in every day life. For example, radioactive decay of $^{238}$U isotope. This nuclei is an alpha-decayer with $T_{1/2} \approx 4.5 \times 10^9$ years. From laws of nuclear physics, it is knows, that nuclei act independently from each other during radioactive decay. The probability of one uranium nucleus to decay is $\lambda = \ln2 /T_{1/2} \approx 5 \times 10^{-18}$ s$^{-1}$. As one can see, probability of a single event is very small. But, suppose, that we have 1 g of $^{238}$U, which contains $N \approx 2.5 \times 10^{21}$ isotopes. The mean value remains constant in time and equals to $\mu = Np \approx 12.5 \times 10^3$ decays/s. \par 
+Poisson distribution has many examples in every day life, for example, the radioactive decay of $^{238}$U isotope. This nucleus is an alpha-decayer with half-life $T_{1/2} \approx 4.5 \times 10^9$ years. From laws of nuclear physics, it is known that nuclei act independently from each other during radioactive decay. The probability of one uranium nucleus to decay in one second is $\lambda = \ln2 /T_{1/2} \approx 5 \times 10^{-18}$ s$^{-1}$. As one can see, probability of one single event is extremely small. But, suppose that we have 1 g of $^{238}$U, which contains $N \approx 2.5 \times 10^{21}$ isotopes, the total number of decay events in one second can be large and can be approximately described by a binomial distribution with $p = 5 \times 10^{-18}$ s$^{-1}$ and $N = 2.5 \times 10^{21}$. By equation \ref{binom_mean_val}, the mean value of the total number of decay events in one second is $\mu = Np \approx 12.5 \times 10^3$ decays/s $ = 12.5 $ decays/ms. If we want a distribution function of the total number of decay events in one millisecond, the Poisson distribution perfectly describes this situation. \par
 \begin{figure}[!h]
 \begin{center}
 \includegraphics*[scale = 0.4]{Figures/Poisson}
@@ -119,13 +126,13 @@ Poisson distribution is discrete and has only one parameter $\mu$, which stands 
 \begin{equation}
 \sigma^2 = \mu 
 \end{equation}
-On Fig.~\ref{fig:Poisson} one can find several examples of Poisson distribution with different values of $\mu$. As it is seen, with small values of $\mu$, Poisson distribution is asymmetric. But with relatively large values of $\mu$ distributions becomes symmetric and can be approximated by the Gaussian distribution. During such approximation the discrete nature of Poisson distribution should be neglected.  \par 
-\textbf{The Gaussian or normal distribution} is one of the most important distributions in statistics and for data analysis in particular. As it was mentioned above, binomial and Poisson distributions can be approximated by Gaussian one. Also, it is known from central limit theorem (CLT), that if a set of independent random variables (even with distributions different from normal) are added, their sum will tend to normal distribution. On practice it means, that many processes can be approximated with Gaussian distribution. For example, instrumental errors are generally distributed normally.
+On Fig.~\ref{fig:Poisson} one can find several examples of Poisson distribution with different values of $\mu$. As it is seen, with small values of $\mu$, Poisson distribution is asymmetric. But with relatively large values of $\mu$ distributions becomes symmetric and can be approximated by the Gaussian distribution. During such approximation, the discrete nature of Poisson distribution can be neglected.  \par
+\textbf{The Gaussian or normal distribution} is one of the most important distributions in statistics and for data analysis in particular. As it was mentioned above, binomial and Poisson distributions can be approximated by Gaussian distribution. Also, it is known from central limit theorem (CLT), that if a set of independent random variables (even with distributions different from normal) are added, their sum will tend to normal distribution. On practice, it means that many processes can be approximated with Gaussian distribution. For example, instrumental errors are generally distributed normally.
 The Gaussian distribution is a symmetric, continuous distribution, with density given by:
 \begin{equation} \label{gauss_dist}
 P(x) = \frac{1}{\sigma \sqrt{2\pi}}exp\Big ( - \frac{(x-\mu)^2}{2\sigma^2} \Big )
 \end{equation}
-It is dependent of two parameters: mean value $\mu$ and standard deviation $\sigma$. Example of Gaussian distribution can be found in Fig.~\ref{fig:Gaussian}. Parameter $\sigma$ characterises the width of Gaussian distribution. It is also common to use another parameter to describe the width - full width of half maximum (FWHM). It can be shown, that:
+It is dependent of two parameters: mean value $\mu$ and standard deviation $\sigma$. Example of Gaussian distribution can be found in Fig.~\ref{fig:Gaussian}. Parameter $\sigma$ characterises the width of Gaussian distribution. It is also common to use another parameter to describe the width, the full width of half maximum (FWHM). It can be shown, that:
 \begin{equation} \label{FWHM}
 \text{FWHM} = 2 \sqrt{2\ln 2}\sigma \approx 2.35 \sigma
 \end{equation}
@@ -141,7 +148,7 @@ It is dependent of two parameters: mean value $\mu$ and standard deviation $\sig
 \caption{\label{fig:Gauss_intervals} Area under Gaussian distribution, contained between different intervals. Figure is taken from \cite{stat_2}.}
 \end{center}
 \end{figure}
-Another important feature of normal distribution is the area under it, depending on the intervals. Example can be found in Fig.~\ref{fig:Gauss_intervals}. The area in the interval $[\mu-\sigma;\mu+\sigma]$ equals to $\approx 68\%$, from the maximum on. For the interval $\pm 2\sigma$ - $95.5\%$, and $\pm 3\sigma$ - $99.7\%$. This result is very important for data representation and means, that if one will present experimental results within only 1$\sigma$, than there is a probability of approximately 1/3, that the true value will be outside the region. If results are presented with 2$\sigma$ interval, this probability is less, then 5\%.
+Another important feature of normal distribution is the area under it, depending on the intervals. Example can be found in Fig.~\ref{fig:Gauss_intervals}. The area in the interval $[\mu-\sigma;\mu+\sigma]$ equals to $\approx 68\%$. For the interval within $\pm 2\sigma$ and $\pm 3\sigma$, the areas are $95.5\%$ and $99.7\%$ respectively. This result is very important for data representation and means that if one will present experimental results within only 1$\sigma$, then there is approximately a probability of 1/3 that the true value will be outside the region. If results are presented with 2$\sigma$ interval, this probability is less than 5\%.
 
 
 
