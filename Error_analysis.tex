@@ -154,22 +154,37 @@ Another important feature of normal distribution is the area under it, depending
 
 \section{Statistical methods in experimental physics} \label{methods}
 
-In general case, average value of a sample $x \in [x_1, x_2, x_3, .... , x_n]$ is calculated in the following way:
+In general case, he estimation of the population mean of a sample $x \in \{ x_1, x_2, x_3, .... , x_n \}$ is calculated in the following way:
 \begin{equation} \label{av_value}
-\bar{x} = \frac{1}{n} \sum{x_i}
+\bar{x} = \frac{1}{n} \sum_ i {x_i}
 \end{equation}
-Standard deviation $\sigma_{\bar{x}}$ of the average value $\bar{x}$ is defined as following:
+The estimation of the population standard deviation $s$ is given by:
+\begin{equation}
+s = \sqrt{\frac{1}{(n-1)} \sum_i {(x_i - \bar{x})^2}}
+\end{equation}
+
+The estimated standard deviation of $\bar{x}$ is given by:
 \begin{equation} \label{standart_dev}
-\sigma_{\bar{x}} = \sqrt{\frac{1}{n(n-1)} \sum{(\bar{x}-x_i)^2}} 
+\sigma_{\bar{x}} = \frac{s}{ \sqrt{n} }
 \end{equation}
-Standard deviation $\sigma_{\bar{x}}$ has a meaning of a statistical error and gives probability of 66$\%$, that the measured value x will be found in the region $\bar{x} - \sigma_{\bar{x}} \le x \le \bar{x} + \sigma_{\bar{x}}$. For confidence interval of $\alpha$ $\%$ standard deviation $\hat{\sigma}$ is written in the following way:
-\begin{equation} \label{standart_dev_big}
-\hat{\sigma} = t_{\alpha,n}\times \sigma_{\bar{x}}
+
+The estimated mean $\bar{x}$ can be described by the normal distribution with the mean $\bar{x}$ and standard deviation $s / \sqrt{n}$, if the sample size is large, typically $n>30$.
+Standard deviation $\sigma_{\bar{x}}$ has a meaning of a statistical error and gives a probability of 66$\%$ that the population mean $\mu$ will be found in the region $\bar{x} - \sigma_{\bar{x}} \le x \le \bar{x} + \sigma_{\bar{x}}$. In physics, confidence interval is usually within $2 \sigma$ with the confidence level $\alpha = 95 \%$
+\begin{equation} \label{confidence_interval_large}
+\bar{x} - 2 \sigma_{\bar{x}} \le x \le \bar{x} + 2 \sigma_{\bar{x}}
 \end{equation}
-where $t_{\alpha,n}$ stands for student's coefficient. In physics and industry, confidence interval is usually taken as $\alpha = 95 \%$. It's value depend on the number of experimental points and can be found from the table~\ref{table:student_t_value}.
+
+If the sample size is small, $n<30$, we need to use the student's $t$ coefficient $t_{\alpha,n}$.
+Its value depends on the sample size n and the confidence level $\alpha$, and their values can be found from the table \ref{table:student_t_value} with the confidence level $\alpha = 95 \%$. The confidence interval with confidence level $\alpha = 95 \%$ is given by
+\begin{equation}
+\bar{x} - t_{0.95, n} \sigma_{\bar{x}} \le x \le \bar{x} + t_{0.95, n} \sigma_{\bar{x}}
+\end{equation}
+When $n>30$, $t_{0.95, n}$ is reduced to 2 and the confidence interval is reduced to \ref{confidence_interval_large}.
+
+
 \begin{table}[!h]
 \begin{center}
-\caption{\label{table:student_t_value} Values of student's $t$ coefficient for confidence interval $\alpha$=95$\%$.}
+\caption{\label{table:student_t_value} Values of student's $t$ coefficient for confidence level $\alpha$ = 95$\%$.}
 \begin{tabular}{l l l l l l l l l}
 \hline
 n & 2 & 3 & 4 & 5 & 6 & 7-8 & 9-10 & 30-$\infty$  \\
@@ -179,18 +194,31 @@ $t_{0.95, n}$ &12.7 & 4.3 & 3.2 & 2.8 & 2.6 & 2.4 & 2.3 & 2 \\
 \end{center}
 \end{table}
 
-During the experiment every quantity contains two types of error: statistical and systematical. Final result for value $x$ is written in the following way:
+During the experiment, every quantity contains two types of error: statistical and systematical. Final result for value $x$ is written in the following way:
 \begin{equation} \label{final_value}
-x = \hat{x} \pm \sqrt{\hat{\sigma}_{stat}^2+\sigma^2_{syst}}
+x = \bar{x} \pm \sqrt{\sigma_{stat}^2+\sigma^2_{syst}}
 \end{equation}
  
 \subsection{Propagation of Errors} \label{error_analysis}
-This section covers a method to estimate an $\sigma_{tot}$ of a function $f=f(x,y,z)$, when standard deviations $\sigma_x$, $\sigma_y$ and $\sigma_z$ are known. Here it is considered that variables $x, y, z$ are independent. It can be shown, that $\sigma_{tot}$ is expressed in the following way:
+This section covers a method to estimate the total error $\sigma_{f}$ of a function $f=f(x,y,z)$, when individual error of variables x, y and z are known, namely $\sigma_x$, $\sigma_y$ and $\sigma_z$. It is considered that variables x, y and z are independent. It can be shown that $\sigma_{f}$ can be expressed in the following way:
 \begin{equation} \label{error_propagation}
-\sigma_{tot} = \sqrt{\Big ( \frac{\partial f}{\partial x} \sigma_x \Big )^2+\Big ( \frac{\partial f}{\partial y} \sigma_y \Big )^2+\Big ( \frac{\partial f}{\partial z} \sigma_z \Big )^2}
+\sigma_{f} = \sqrt{\Big ( \frac{\partial f}{\partial x} \sigma_x \Big )^2+\Big ( \frac{\partial f}{\partial y} \sigma_y \Big )^2+\Big ( \frac{\partial f}{\partial z} \sigma_z \Big )^2}
 \end{equation} 
-In more general case, variables $x, y, z$ can be dependent. In this case covariances between parameters must be taken into account. Additional information on this case can be found in \cite{stat_1, stat_2, stat_3}.
+In more general case, if variables x, y and z are dependent, the covariances between variables must be taken into account. Additional information on this case can be found in \cite{stat_1, stat_2, stat_3}.
+
+For example, if $f(x,y,z) = x+y+z$, their partial derivatives are 1. The total error is
+\begin{equation}
+\sigma_{f} = \sqrt{( \sigma_x )^2 + ( \sigma_y )^2+ ( \sigma_z )^2}
+\end{equation}
+ This means that if $f$ is the sum of x, y and z, the resulting error $\sigma_{f}$ is the square root of the sum of squares of individual errors.
  
+Consider the case that $f(x,y,z) = xyz$. The total error is
+\begin{align}
+\sigma_{f} &= \sqrt{( yz \sigma_x )^2 + ( xz \sigma_y )^2+ ( yz \sigma_z )^2} \\
+\frac{ \sigma_{f} }{xyz} &= \sqrt{ \Big( \frac{\sigma_x}{x} \Big)^2 + \Big( \frac{\sigma_y}{y} \Big)^2 + \Big( \frac{\sigma_z}{z} \Big)^2} \\
+\frac{ \sigma_{f} }{f} &= \sqrt{ \Big( \frac{\sigma_x}{x} \Big)^2 + \Big( \frac{\sigma_y}{y} \Big)^2 + \Big( \frac{\sigma_z}{z} \Big)^2}
+\end{align}
+This means that if $f$ is the product of x, y and z, the resulting relative error $\sigma_{f}/f$ is the square root of the sum of squares of individual relative errors.
 
 \section{Fitting methods}
 \subsection{Likelihood function method}
