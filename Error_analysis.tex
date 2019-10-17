@@ -221,20 +221,18 @@ Consider the case that $f(x,y,z) = xyz$. The total error is
 This means that if $f$ is the product of x, y and z, the resulting relative error $\sigma_{f}/f$ is the square root of the sum of squares of individual relative errors.
 
 \section{Fitting methods}
-\subsection{Likelihood function method}
-
+A fitting method is a process of constructing a curve, or mathematical function, that has the best fit to the experimental data.
 \subsection{$\chi^2$ method}
-
-$\chi^2$ analysis \cite{stat_2, BAKER1984437, reduced_chi_squared} is based on minimising the difference between experimental data and the fitting function:
-
+The $\chi^2$ method is useful for testing how good the fit is.
+$\chi^2$ analysis \cite{stat_2, BAKER1984437, reduced_chi_squared} is based on minimising the difference between experimental data and the fitting function. Suppose that we have a series of experimental data $(x_j,y_j)$ with the error of $y_j$ denoted by $\sigma_j$, and we use a fitting function $f(x_j,\vec{\theta})$ to fit the experimental data $y_j$ by varing different values of the parameters $\vec{\theta}$. The deviation bewteen the experimental data and the fitting curve can be measured by the following quantity $\chi^2$:
 \begin{equation} \label{chi_square_formula}
-\chi^2 = \sum_{j = 1}^{n} \Big ( \frac{y_j - F(E_j,\vec{\theta})}{\sigma_j} \Big )^2 
+\chi^2 = \sum_{j = 1}^{n} \Big ( \frac{y_j - f(x_j,\vec{\theta})}{\sigma_j} \Big )^2
 \end{equation}
-
-where summation is taken over all experimental points. In formula \ref{chi_square_formula} $y_j$ stands for experimental data points, $\sigma_j$ - standard deviation (error) of experimental data, $F(x_j,\vec{\theta})$ - fitting function with a set of parameters $\vec{\theta}$. Parameters $\theta$ are found from the minimisation condition:
-
+where summation is taken over all experimental points.
+By finding the minimum value of $\chi^2$ by trying all possible values of the parameters $\vec{\theta}$, the best values of the parameters $\vec{\theta}$ can be found and hence the best-fit curve can be found.
+Every best-fit values of the parameters $\theta_{i0}$ need to satisfy the following minimisation condition:
 \begin{equation} \label{chi_minimisation_condition}
-\frac{\partial \chi^2}{\partial \theta_j} = 0
+\left. \frac{\partial \chi^2}{\partial \theta_i} \right|_{\theta_{i} = \theta_{i0}} = 0
 \end{equation}
 
 \subsection{Analysis of data in case of large statics}
