@@ -30,7 +30,7 @@ This lab allows students to meet several goals:
 \begin{enumerate}
 \item Introduction to error analysis and statistical analysis of the data
 \item Introduction to basics of analysis and simulations with \textbf{Matlab} (or any other software used to do data analysis)
-\item Performance of basic measurements of data with low are large statistics
+\item Performance of basic measurements of data with low and large statistics
 \end{enumerate}
 
 
@@ -287,21 +287,30 @@ To measure the quality of the fit, we can divide the $\chi^2$ by the degree of f
 \end{equation}
 The fit is good if the expression \ref{reduced_chi_square} is close to 1.
 
-\subsection{Analysis of data in case of large statics}
-The technique, discussed at the beginning of section \ref{methods}, can be used always. But the case of large statistics of experimental data gives access to analyse the data via fitting. On Fig.~\ref{fig:radius_distribution} one can see the examples of the distribution of a radius for a particle and square displacement of a Brownian particle. Large statistics of data allows to build the distribution of a value $x$. Mean value $\bar{x}$ and standard deviation $\sigma_{\bar{x}}$ of mean value $\bar{x}$ are estimated from the fit of the distribution. According to Central limit theorem a set of independent random variables tends toward a normal (Gauss) distribution. On the Fig.~\ref{fig:radius_distribution} one can find distribution of the value of radius $r$ of Brownian particle and square displacement $\langle x^2 \rangle$.
+\subsection{Analysis of data in case of large statistics}
+The technique, discussed at the beginning of section \ref{methods}, can always be used .
+But in the case of large statistics of experimental data, we can analyse the data by fitting a histogram by a normal distribution, because the histogram is reliable only if the number of experimental data is large.
+We can do many sets of experiments.
+And, for each experiments, we collect a fixed number of the experimental data and calculate its means.
+According to the central limit theorem, the mean of a experiment can be approximately described by a normal distribution.
+
+In figure~\ref{fig:radius_distribution}, it shows the examples of the histograms of means of a radius for a particle $r$ and square displacement of a Brownian particle $\langle x^2 \rangle$.
+The histogram allows us to measure the mean value $\bar{x}$ and its standard deviation $\sigma_{\bar{x}}$, described in equation \ref{av_value} and \ref{standart_dev}, by fitting the histogram by a normal distribution.
+
 \begin{figure}[!h]
 \begin{center}
 \includegraphics*[scale = 0.25]{Figures/two_plots}
-\caption{\label{fig:radius_distribution} Example of the distribution of a radius for a particle and square displacement of a Brownian particle. Data is generated using Gauss distribution in both cases.}
+\caption{\label{fig:radius_distribution} Example of the distribution of a radius for a particle and square displacement of a Brownian particle. Data is generated using Gaussian distribution in both cases.}
 \end{center}
 \end{figure}
-Final result with confidence interval of $\alpha = 66 \%$ is written in the following way:
+
+Final result with confidence interval of confidence level $\alpha = 66 \%$ is
 \begin{equation}
-x = \bar{x} \pm \sqrt{\sigma_{stat}+\sigma_{syst}}
+x = \bar{x} \pm \sqrt{ (\sigma_{stat})^2 + (\sigma_{syst})^2 }
 \end{equation}
-Final result with confidence interval of $\alpha = 95 \%$ is written in the following way:
+Final result with confidence interval of $\alpha = 95 \%$ is
 \begin{equation} \label{error_offline}
-x = \bar{x} \pm \sqrt{2\sigma_{stat}+\sigma_{syst}}
+x = \bar{x} \pm \sqrt{ (2\sigma_{stat})^2 + (\sigma_{syst})^2}
 \end{equation}
 
 
