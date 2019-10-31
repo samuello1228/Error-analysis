@@ -221,7 +221,79 @@ Consider the case that $f(x,y,z) = xyz$. The total error is
 This means that if $f$ is the product of x, y and z, the resulting relative error $\sigma_{f}/f$ is the square root of the sum of squares of individual relative errors.
 
 \section{Fitting methods}
-A fitting method is a process of constructing a curve, or mathematical function, that has the best fit to the experimental data.
+A fitting method is a process of constructing a curve, or mathematical function, that best fits to the experimental data.
+The form of the theoretical function needs to be known before the fitting process.
+In general, the form of the theoretical function is a function of one varible $x$ and some parameters $(\theta_1,\theta_2,\dots,\theta_m)$.
+\begin{equation}
+y = f(x;\theta_1,\theta_2,\dots,\theta_m)
+\end{equation}
+The fitting process is to find the best values of the parameters, which best describe the experimental data.
+Also, the errors of the estimation of the best-fit values need to be calculated.
+In this section, we will introduce two fitting methods: the maximum likelihood method and the $\chi^2$ method.
+In the maximum likelihood method, the experimental data is a sample of n independent observations $\{ x_1, x_2, \dots , x_n \}$, which are from a theoretical probability density function $y = f(x;\theta_1,\theta_2,\dots,\theta_m)$.
+In the $\chi^2$ method, the experimental data is a set of points $(x_i,y_i)$, which are related by a theoretical function $y = f(x;\theta_1,\theta_2,\dots,\theta_m)$ .
+
+\subsection{Maximum likelihood method \cite{stat_2}}
+Suppose that we have a sample of n independent observations $\{ x_1, x_2, \dots , x_n \}$, which are from a theoretical probability density function $y = f(x;\theta_1,\theta_2,\dots,\theta_m)$, where $(\theta_1,\theta_2,\dots,\theta_m)$ are the true values of the parameters of the theoretical probability density function.
+The probability of observing a specific sample of n independent observations $\{ x_1, x_2, \dots , x_n \}$ is called the likelihood function $L$ and is calculated by the product of the individual probability.
+\begin{equation}
+L(\theta_1,\theta_2,\dots,\theta_m;x_1,x_2,\dots,x_n) = \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m)
+\end{equation}
+The principle for finding the best-fit values of the parameters is to maximize the likelihood function $L$.
+Every best-fit values of the parameters need to satisfy the following maximization condition:
+\begin{equation}  \label{likelihood_maximization}
+\frac{\partial L}{\partial \theta_j} = 0 \qquad \text{for } 1 \leq  j \leq m
+\end{equation}
+Depending on the form of $L$, it may also be easier to maximize the logarithm of $L$, rather than $L$ itself.
+\begin{equation}
+\frac{\partial ( \ln L )}{\partial \theta_j} = 0 \qquad \text{for } 1 \leq  j \leq m
+\end{equation}
+which yields the same results as \ref{likelihood_maximization}.
+By solving the equations, the solution $(\hat{\theta}_1,\hat{\theta}_2,\dots,\hat{\theta}_m)$ are called the maximum likelihood estimator for the parameter $\theta$.
+The caret over the parameters is to distinguish the estimated value from the true value.
+
+It should be realized now that the estimator $\hat{\theta}_j$ is also a random variable, since it is a function of $x_i$.
+\begin{equation}
+\hat{\theta}_j = \hat{\theta}_j(x_1,x_2,\dots,x_n)
+\end{equation}
+If a second sample is taken, the estimator $\hat{\theta}_j$ will have a different value.
+The estimator $\hat{\theta}_j$ is thus also described by a probability distribution.
+This leads us to the second half of the estimation problem: What is the error of the estimators $\hat{\theta}_j$?
+This is given by the standard deviation of the estimator distribution.
+First, we need to calculate the mean of the estimator distribution, which is given by the equation \ref{first_moment}.
+\begin{align}
+\mu_{\hat{\theta}_j} &= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
+&= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) \Big[ \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m) \Big] dx_1 dx_2 \dots dx_n \\
+&= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) L(\theta_1,\theta_2,\dots,\theta_m;x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n
+\end{align}
+After the integration, it only depends on the true values of parameters $(\theta_1,\theta_2,\dots,\theta_m)$.
+A estimator with the property that $\mu_{\hat{\theta}_j} = \theta_j$ is called an unbiased estimator.
+In this following text, we assume all estimators are unbiased estimators.
+The variance of the estimator distribution can be calculated by the equation \ref{second_moment}.
+\begin{align}
+\sigma_{\hat{\theta}_j}^2 &= \int (\hat{\theta}_j - \mu_{\hat{\theta}_j} )^2 P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
+&= \int (\hat{\theta}_j - \theta_j )^2 \Big[ \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m) \Big] dx_1 dx_2 \dots dx_n
+\end{align}
+
+\subsubsection{Estimator of Poisson distribution}
+Suppose we have n independent measurements of samples $\{ x_1, x_2, \dots , x_n \}$ from a Poisson distribution with mean $lambda$. The likelihood function is
+\begin{align}
+L(\lambda;x_1,x_2,\dots,x_n) &= \prod_{i = 1}^{n} \frac{\lambda^{x_i}}{x_i !} \exp(-\lambda) \\
+&= \exp(-n \lambda) \prod_{i = 1}^{n} \frac{\lambda^{x_i}}{x_i !} \\
+\ln L &= -n \lambda + \sum_{i = 1}^{n} x_i \ln(\lambda) - \sum_{i = 1}^{n} \ln(x_i !) \\
+&= -n \lambda + \ln(\lambda) \sum_{i = 1}^{n} x_i - \sum_{i = 1}^{n} \ln(x_i !)
+\end{align}
+Differentiating and setting the result to zero, we then find
+\begin{align}
+\frac{\partial ( \ln L )}{\partial \lambda} = -n + \frac{1}{\lambda} \sum_{i = 1}^{n} x_i &= 0 \\
+\hat{\lambda} &= \frac{1}{n} \sum_{i = 1}^{n} x_i \\
+\hat{\lambda} &= \bar{x}
+\end{align}
+The estimator of $\hat{\lambda}$ is just the sample mean $\bar{x}$.
+
+To calculate the error of the estimator, we need to first calculate the mean of estimator $\mu_{\hat{\lambda}}$.
+By the appendix \ref{proof}, $\mu_{\hat{\lambda}} = \mu_{\bar{x}} = \mu = \lambda$, therefore the estimator $\hat{\lambda}$ is an unbiased estimator.
+
 \subsection{$\chi^2$ method}
 The $\chi^2$ method is useful for testing how good the fit is.
 $\chi^2$ analysis \cite{stat_2, BAKER1984437, reduced_chi_squared} is based on minimizing the difference between experimental data and the fitting function. Suppose that we have a series of experimental data $(x_i,y_i)$ with the error of $y_i$ denoted by $\sigma_i$, and we use a fitting function $y = f(x;\theta_1,\theta_2,\dots,\theta_m)$ to fit the experimental data $y_i$ by varing different values of the m parameters $\theta_j$. The deviation bewteen the experimental data and the fitting curve can be measured by the following quantity $\chi^2$:
@@ -336,6 +408,49 @@ To successfully pass the lab, a student must complete the following tasks:
 \item In what cases does the $\chi^2$ analysis method can be used? Derive $\chi^2$ analysis method from maximum likelihood method.
 \item Other questions
 \end{enumerate}
+
+\section{Appendix: Proof that the mean of the sample mean is the population mean} \label{proof}
+Prove by the first principle (discrete variable):
+\begin{align*}
+\mu_{\bar{x}}
+&= \sum_{x_1 = 0}^{\infty} \sum_{x_2 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} \bar{x} \prod_{i = 1}^{n} P(x_i) \\
+&= \sum_{x_1 = 0}^{\infty} \sum_{x_2 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} \frac{1}{n} ( x_1 + x_2 + \dots + x_n) \Big[ P(x_1) P(x_2) \dots P(x_n) \Big] \\
+&= \frac{1}{n} \sum_{x_1 = 0}^{\infty} \sum_{x_2 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} x_1 P(x_1) P(x_2) \dots P(x_n) \\
+&+ \frac{1}{n} \sum_{x_1 = 0}^{\infty} \sum_{x_2 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} x_2 P(x_1) P(x_2) \dots P(x_n) \\
+& \qquad \vdots \\
+&+ \frac{1}{n} \sum_{x_1 = 0}^{\infty} \sum_{x_2 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} x_n P(x_1) P(x_2) \dots P(x_n) \\
+&= \frac{1}{n} \sum_{x_2 = 0}^{\infty} \sum_{x_3 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} P(x_2) P(x_3) \dots P(x_n) \sum_{x_1 = 0}^{\infty} x_1 P(x_1) \\
+&+ \frac{1}{n} \sum_{x_1 = 0}^{\infty} \sum_{x_3 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} P(x_1) P(x_3) \dots P(x_n) \sum_{x_2 = 0}^{\infty} x_2 P(x_2) \\
+& \qquad \vdots \\
+&+ \frac{1}{n} \sum_{x_1 = 0}^{\infty} \sum_{x_2 = 0}^{\infty} \dots \sum_{x_{n-1} = 0}^{\infty} P(x_1) P(x_2) \dots P(x_{n-1}) \sum_{x_n = 0}^{\infty} x_n P(x_n) \\
+&= \frac{1}{n} \sum_{x_2 = 0}^{\infty} \sum_{x_3 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} P(x_2) P(x_3) \dots P(x_n) \mu \\
+&+ \frac{1}{n} \sum_{x_1 = 0}^{\infty} \sum_{x_3 = 0}^{\infty} \dots \sum_{x_n = 0}^{\infty} P(x_1) P(x_3) \dots P(x_n) \mu \\
+& \qquad \vdots \\
+&+ \frac{1}{n} \sum_{x_1 = 0}^{\infty} \sum_{x_2 = 0}^{\infty} \dots \sum_{x_{n-1} = 0}^{\infty} P(x_1) P(x_2) \dots P(x_{n-1}) \mu \\
+&= \frac{\mu}{n} \Bigg( \sum_{x_2 = 0}^{\infty} P(x_2) \Bigg) \Bigg( \sum_{x_3 = 0}^{\infty} P(x_3) \Bigg) \dots \Bigg( \sum_{x_n = 0}^{\infty} P(x_n) \Bigg) \\
+&+ \frac{\mu}{n} \Bigg( \sum_{x_1 = 0}^{\infty} P(x_1) \Bigg) \Bigg( \sum_{x_3 = 0}^{\infty} P(x_3) \Bigg) \dots \Bigg( \sum_{x_n = 0}^{\infty} P(x_n) \Bigg) \\
+& \qquad \vdots \\
+&+ \frac{\mu}{n} \Bigg( \sum_{x_1 = 0}^{\infty} P(x_1) \Bigg) \Bigg( \sum_{x_2 = 0}^{\infty} P(x_2) \Bigg) \dots \Bigg( \sum_{x_{n-1} = 0}^{\infty} P(x_{n-1}) \Bigg)
+\end{align*}
+
+\begin{align*}
+\mu_{\bar{x}}
+&= \frac{\mu}{n} (1) (1) \dots (1) \\
+&+ \frac{\mu}{n} (1) (1) \dots (1) \\
+& \qquad \vdots \\
+&+ \frac{\mu}{n} (1) (1) \dots (1) \\
+&= \mu
+\end{align*}
+Prove by the expected value:
+\begin{align*}
+E(\bar{x})
+&= E \Bigg( \frac{1}{n} \sum_{i=1}^n x_i \Bigg) \\
+&= \frac{1}{n} E \Bigg( \sum_{i=1}^n x_i \Bigg) \\
+&= \frac{1}{n} \sum_{i=1}^n E(x_i) \\
+&= \frac{1}{n} \sum_{i=1}^n \mu \\
+&= \frac{1}{n} (n \mu) \\
+&= \mu
+\end{align*}
 
 \medskip
 
