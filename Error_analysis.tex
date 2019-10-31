@@ -154,13 +154,13 @@ Another important feature of normal distribution is the area under it, depending
 
 \section{Statistical methods in experimental physics} \label{methods}
 
-In general case, he estimation of the population mean of a sample $x \in \{ x_1, x_2, x_3, .... , x_n \}$ is calculated in the following way:
+In general case, he estimation of the population mean of a sample $x \in \{ x_1, x_2, x_3, \dots , x_n \}$ is calculated in the following way:
 \begin{equation} \label{av_value}
-\bar{x} = \frac{1}{n} \sum_ i {x_i}
+\bar{x} = \frac{1}{n} \sum_{i = 1}^{n} {x_i}
 \end{equation}
 The estimation of the population standard deviation $s$ is given by:
 \begin{equation}
-s = \sqrt{\frac{1}{(n-1)} \sum_i {(x_i - \bar{x})^2}}
+s = \sqrt{\frac{1}{(n-1)} \sum_{i = 1}^{n} {(x_i - \bar{x})^2}}
 \end{equation}
 
 The estimated standard deviation of $\bar{x}$ is given by:
@@ -224,18 +224,18 @@ This means that if $f$ is the product of x, y and z, the resulting relative erro
 A fitting method is a process of constructing a curve, or mathematical function, that has the best fit to the experimental data.
 \subsection{$\chi^2$ method}
 The $\chi^2$ method is useful for testing how good the fit is.
-$\chi^2$ analysis \cite{stat_2, BAKER1984437, reduced_chi_squared} is based on minimizing the difference between experimental data and the fitting function. Suppose that we have a series of experimental data $(x_i,y_i)$ with the error of $y_i$ denoted by $\sigma_i$, and we use a fitting function $y = f(x;a_1,a_2,...,a_m)$ to fit the experimental data $y_i$ by varing different values of the m parameters $a_j$. The deviation bewteen the experimental data and the fitting curve can be measured by the following quantity $\chi^2$:
+$\chi^2$ analysis \cite{stat_2, BAKER1984437, reduced_chi_squared} is based on minimizing the difference between experimental data and the fitting function. Suppose that we have a series of experimental data $(x_i,y_i)$ with the error of $y_i$ denoted by $\sigma_i$, and we use a fitting function $y = f(x;\theta_1,\theta_2,\dots,\theta_m)$ to fit the experimental data $y_i$ by varing different values of the m parameters $\theta_j$. The deviation bewteen the experimental data and the fitting curve can be measured by the following quantity $\chi^2$:
 \begin{equation} \label{chi_square_formula}
-\chi^2 = \sum_{i = 1}^{n} \Big ( \frac{y_i - f(x_i;a_1,a_2,...,a_m)}{\sigma_i} \Big )^2
+\chi^2 = \sum_{i = 1}^{n} \Big ( \frac{y_i - f(x_i;\theta_1,\theta_2,\dots,\theta_m)}{\sigma_i} \Big )^2
 \end{equation}
 where summation is taken over all experimental points.
-By finding the minimum value of $\chi^2$ by trying all possible values of the m parameters $a_j$, the best values of the parameters can be found and hence the best-fit curve can be found.
+By finding the minimum value of $\chi^2$ by trying all possible values of the m parameters $\theta_j$, the best values of the parameters can be found and hence the best-fit curve can be found.
 Every best-fit values of the parameters need to satisfy the following minimization condition:
 \begin{equation} \label{chi_minimisation_condition}
-\frac{\partial \chi^2}{\partial a_j} = 0 \qquad \text{for } 1 \leq  j \leq m
+\frac{\partial \chi^2}{\partial \theta_j} = 0 \qquad \text{for } 1 \leq  j \leq m
 \end{equation}
 
-\subsection{Linear fit}
+\subsubsection{Linear fit}
 We can use the linear fit as an example for using the $\chi^2$ method.
 Suppose the fitting function is $y = f(x;a,b) = ax + b$, with the parameters a and b.
 By the equation \ref{chi_square_formula}, the $\chi^2$ is
@@ -287,7 +287,7 @@ To measure the quality of the fit, we can divide the $\chi^2$ by the degree of f
 \end{equation}
 The fit is good if the expression \ref{reduced_chi_square} is close to 1.
 
-\subsection{Analysis of data in case of large statistics}
+\subsubsection{Analysis of data in case of large statistics}
 The technique, discussed at the beginning of section \ref{methods}, can always be used .
 But in the case of large statistics of experimental data, we can analyse the data by fitting a histogram by a normal distribution, because the histogram is reliable only if the number of experimental data is large.
 We can do many sets of experiments.
@@ -345,7 +345,7 @@ To successfully pass the lab, a student must complete the following tasks:
 James F. (2008). Statistical Methods in Experimental Physics.
 
 \bibitem{stat_2}
-Leo W. R. (1994). Techniques for Nuclear and Particle Physics Experiments. p. 81
+Leo W. R. (1994). Techniques for Nuclear and Particle Physics Experiments. Pages 81 - 113
 
 \bibitem{stat_3}
 Taylor J. R. (1997). An Introduction to Error Analysis. 
