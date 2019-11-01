@@ -41,21 +41,21 @@ Data analysis and statistical methods play an essential role in science as it is
 \section{Elements of probability theory: distribution, moments of distribution, types of distribution}
 During the experiment one deals with stochastic processes, during which each next trial is independent on previous result. Random processes are described by the \textit{probability density} function $P(x)$ (term \textit{distribution} function is also used). Depending on the nature of variable \enquote{x}, distribution $P(x)$ can be continuous or discrete. If variable \enquote{x} is discrete, then the probability to obtain \enquote{$x_i$} equals to $P(x_i)$. If variable \enquote{x} is continuous, then the probability to obtain \enquote{x} in the region from $x$ to $x+dx$ equals to $P(x)dx$. \\
 Usually, distribution probability is normalised to 1. In case of continuous distribution:
-\begin{equation} \label{norm_P_1}
+\begin{equation*}
 \int_{-\infty}^{+\infty} P(x)dx = 1
-\end{equation}
+\end{equation*}
 In case of discrete distribution:
-\begin{equation} \label{norm_P_2}
+\begin{equation*}
 \sum_{i} P(x_i) = 1
-\end{equation}
+\end{equation*}
 The probability $p(x)$ to find $x$ between certain values in case of continuous distribution is defined in the following way:
-\begin{equation} \label{prob_find_1}
+\begin{equation*}
 p(x_1 \leq x \leq x_2) = \int_{x_1}^{x_2} P(x)dx
-\end{equation}
+\end{equation*}
 In case of discrete distribution, integration should be replaced with summation:
-\begin{equation} \label{prob_find_2}
+\begin{equation*}
 p(x_1 \leq x \leq x_2) = \sum_{x = x_1}^{x_2} P(x)
-\end{equation}
+\end{equation*}
 
 \subsection{Moments of distribution}
 Theoretical mean value $\mu$ of variable $x$ is defined as the first moment about zero of the distribution $P(x)$. Mathematically it can be expressed in the following way:
@@ -74,46 +74,46 @@ E[f(x)] =  \int f(x) P(x) dx
 \end{equation}
 
 In the case of discrete distributions, integration in equations \ref{first_moment}, \ref{second_moment} and \ref{expectation_value} should be changed to summation.
-\begin{equation}
+\begin{equation*}
 E[f(x)] =  \sum_i f(x_i) P(x_i)
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 \mu = E[x] = \sum_i x_i P(x_i)
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 \sigma^2 = E[(x-\mu)^2] = \sum_i (x_i-\mu)^2P(x_i)
-\end{equation}
+\end{equation*}
 Students are welcome to study literature for more information about it \cite{stat_1, stat_2, stat_3}.
 
 In the case of random multi-variable $(x_1,x_2,\dots,x_n)$ with a multivariate distribution $P(x_1,x_2,\dots,x_n)$, the definition of expectation value can be generalized.
-\begin{align}
+\begin{align*}
 E[f(x_1,x_2,\dots,x_n)] &=  \int f(x_1,x_2,\dots,x_n) P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
 E[f(x_1,x_2,\dots,x_n)] &=  \sum_{x_1} \sum_{x_2} \dots \sum_{x_n} f(x_1,x_2,\dots,x_n) P(x_1,x_2,\dots,x_n)
-\end{align}
+\end{align*}
 
 The correlation (dependency) between parameters $x$ and $y$ is described by covariance:
-\begin{equation} \label{cov}
+\begin{equation*}
 cov(x,y) = E[(x-\mu_x)(y-\mu_y)] = \int (x-\mu_x)(y-\mu_y)P(x,y)dxdy
-\end{equation}
+\end{equation*}
 where $P(x,y)$ is a 2-dimensional distribution of variables \enquote{x} and \enquote{y}. It is also convenient to introduce correlation coefficient $\rho$ ($\rho \in [-1; 1]$):
-\begin{equation} \label{rho}
+\begin{equation*}
 \rho = \frac{cov(x,y)}{\sigma_x \sigma_y}
-\end{equation}
+\end{equation*}
 The value of $\rho$ gives information about the dependency between parameters. If $|\rho| = 1$, then it is a case of perfect linear correlation. If $\rho = 0$, variables are independent.
 
 \subsection{Types of distributions: Binomial, Poisson, Gaussian} 
 \textbf{The Binomial distribution} describes processes in which outcome of a trial is dichotomous (\textit{yes} or \textit{no}, \textit{head} or \textit{tail} and etc.). The probability of $r$ positive (or negative) outcomes in $N$ trials is calculated in the following way:
-\begin{equation} \label{binom_dist}
+\begin{equation*}
 P(r) = \frac{N!}{r! (N-r)!}p^r (1-p)^{N-r}
-\end{equation}
+\end{equation*}
 where p is the probability of success (or failure) of one single trial. Examples of binomial distribution can be found in Fig.~\ref{fig:Binom}. It is easy to see that binomial distribution is discrete. Theoretical mean value $\mu$ equals to:
 \begin{equation} \label{binom_mean_val}
 \mu = \sum_r r P(r) = Np
 \end{equation}
 The variance of the distribution equals to:
-\begin{equation} \label{binom_var}
+\begin{equation*}
 \sigma^2 = \sum_r (r-\mu)^2P(r) = Np(1-p)
-\end{equation}
+\end{equation*}
 Binomial distribution can be approximated with Poisson or Gaussian distributions, depending on the parameters. 
 \begin{figure}[!h]
 \begin{center}
@@ -129,9 +129,9 @@ Binomial distribution can be approximated with Poisson or Gaussian distributions
 \item Mean value $\mu = Np$ stays finite.
 \end{enumerate}
 Probability to observe $r$ events under the conditions listed above is calculated in the following way:
-\begin{equation} \label{poisson_dist}
+\begin{equation*}
 P(r) = \frac{\mu^r e^{-\mu}}{r!}
-\end{equation}
+\end{equation*}
 Poisson distribution has many examples in every day life, for example, the radioactive decay of $^{238}$U isotope. This nucleus is an alpha-decayer with half-life $T_{1/2} \approx 4.5 \times 10^9$ years. From laws of nuclear physics, it is known that nuclei act independently from each other during radioactive decay. The probability of one uranium nucleus to decay in one second is $\lambda = \ln2 /T_{1/2} \approx 5 \times 10^{-18}$ s$^{-1}$. As one can see, probability of one single event is extremely small. But, suppose that we have 1 g of $^{238}$U, which contains $N \approx 2.5 \times 10^{21}$ isotopes, the total number of decay events in one second can be large and can be approximately described by a binomial distribution with $p = 5 \times 10^{-18}$ s$^{-1}$ and $N = 2.5 \times 10^{21}$. By equation \ref{binom_mean_val}, the mean value of the total number of decay events in one second is $\mu = Np \approx 12.5 \times 10^3$ decays/s $ = 12.5 $ decays/ms. If we want a distribution function of the total number of decay events in one millisecond, the Poisson distribution perfectly describes this situation. \par
 \begin{figure}[!h]
 \begin{center}
@@ -140,19 +140,19 @@ Poisson distribution has many examples in every day life, for example, the radio
 \end{center}
 \end{figure}
 Poisson distribution is discrete and has only one parameter $\mu$, which stands for the mean value. It can be shown, that variance of the distributions equals to:
-\begin{equation}
+\begin{equation*}
 \sigma^2 = \mu 
-\end{equation}
+\end{equation*}
 On Fig.~\ref{fig:Poisson} one can find several examples of Poisson distribution with different values of $\mu$. As it is seen, with small values of $\mu$, Poisson distribution is asymmetric. But with relatively large values of $\mu$ distributions becomes symmetric and can be approximated by the Gaussian distribution. During such approximation, the discrete nature of Poisson distribution can be neglected.  \par
 \textbf{The Gaussian or normal distribution} is one of the most important distributions in statistics and for data analysis in particular. As it was mentioned above, binomial and Poisson distributions can be approximated by Gaussian distribution. Also, it is known from central limit theorem (CLT), that if a set of independent random variables (even with distributions different from normal) are added, their sum will tend to normal distribution. On practice, it means that many processes can be approximated with Gaussian distribution. For example, instrumental errors are generally distributed normally.
 The Gaussian distribution is a symmetric, continuous distribution, with density given by:
-\begin{equation} \label{gauss_dist}
-P(x) = \frac{1}{\sigma \sqrt{2\pi}}exp\Big ( - \frac{(x-\mu)^2}{2\sigma^2} \Big )
-\end{equation}
+\begin{equation*}
+P(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp \Bigg[ - \frac{(x-\mu)^2}{2\sigma^2} \Bigg]
+\end{equation*}
 It is dependent of two parameters: mean value $\mu$ and standard deviation $\sigma$. Example of Gaussian distribution can be found in Fig.~\ref{fig:Gaussian}. Parameter $\sigma$ characterises the width of Gaussian distribution. It is also common to use another parameter to describe the width, the full width of half maximum (FWHM). It can be shown, that:
-\begin{equation} \label{FWHM}
+\begin{equation*}
 \text{FWHM} = 2 \sqrt{2\ln 2}\sigma \approx 2.35 \sigma
-\end{equation}
+\end{equation*}
 \begin{figure}[!t]
 \begin{center}
 \includegraphics*[scale = 0.4]{Figures/Gauss}
@@ -176,7 +176,7 @@ In general case, he estimation of the population mean of a sample $x \in \{ x_1,
 \bar{x} = \frac{1}{n} \sum_{i = 1}^{n} {x_i}
 \end{equation}
 The estimation of the population standard deviation $s$ is given by:
-\begin{equation}
+\begin{equation} \label{sample_standard_dev}
 s = \sqrt{\frac{1}{(n-1)} \sum_{i = 1}^{n} {(x_i - \bar{x})^2}}
 \end{equation}
 
@@ -193,9 +193,9 @@ Standard deviation $\sigma_{\bar{x}}$ has a meaning of a statistical error and g
 
 If the sample size is small, $n<30$, we need to use the student's $t$ coefficient $t_{\alpha,n}$.
 Its value depends on the sample size n and the confidence level $\alpha$, and their values can be found from the table \ref{table:student_t_value} with the confidence level $\alpha = 95 \%$. The confidence interval with confidence level $\alpha = 95 \%$ is given by
-\begin{equation}
+\begin{equation*}
 \bar{x} - t_{0.95, n} \sigma_{\bar{x}} \le x \le \bar{x} + t_{0.95, n} \sigma_{\bar{x}}
-\end{equation}
+\end{equation*}
 When $n>30$, $t_{0.95, n}$ is reduced to 2 and the confidence interval is reduced to \ref{confidence_interval_large}.
 
 
@@ -212,38 +212,38 @@ $t_{0.95, n}$ &12.7 & 4.3 & 3.2 & 2.8 & 2.6 & 2.4 & 2.3 & 2 \\
 \end{table}
 
 During the experiment, every quantity contains two types of error: statistical and systematical. Final result for value $x$ is written in the following way:
-\begin{equation} \label{final_value}
+\begin{equation*}
 x = \bar{x} \pm \sqrt{\sigma_{stat}^2+\sigma^2_{syst}}
-\end{equation}
+\end{equation*}
  
-\subsection{Propagation of Errors} \label{error_analysis}
+\subsection{Propagation of Errors}
 This section covers a method to estimate the total error $\sigma_{f}$ of a function $f=f(x,y,z)$, when individual error of variables x, y and z are known, namely $\sigma_x$, $\sigma_y$ and $\sigma_z$. It is considered that variables x, y and z are independent. It can be shown that $\sigma_{f}$ can be expressed in the following way:
-\begin{equation} \label{error_propagation}
+\begin{equation*}
 \sigma_{f} = \sqrt{\Big ( \frac{\partial f}{\partial x} \sigma_x \Big )^2+\Big ( \frac{\partial f}{\partial y} \sigma_y \Big )^2+\Big ( \frac{\partial f}{\partial z} \sigma_z \Big )^2}
-\end{equation} 
+\end{equation*}
 In more general case, if variables x, y and z are dependent, the covariances between variables must be taken into account. Additional information on this case can be found in \cite{stat_1, stat_2, stat_3}.
 
 For example, if $f(x,y,z) = x+y+z$, their partial derivatives are 1. The total error is
-\begin{equation}
+\begin{equation*}
 \sigma_{f} = \sqrt{( \sigma_x )^2 + ( \sigma_y )^2+ ( \sigma_z )^2}
-\end{equation}
+\end{equation*}
  This means that if $f$ is the sum of x, y and z, the resulting error $\sigma_{f}$ is the square root of the sum of squares of individual errors.
  
 Consider the case that $f(x,y,z) = xyz$. The total error is
-\begin{align}
+\begin{align*}
 \sigma_{f} &= \sqrt{( yz \sigma_x )^2 + ( xz \sigma_y )^2+ ( yz \sigma_z )^2} \\
 \frac{ \sigma_{f} }{xyz} &= \sqrt{ \Big( \frac{\sigma_x}{x} \Big)^2 + \Big( \frac{\sigma_y}{y} \Big)^2 + \Big( \frac{\sigma_z}{z} \Big)^2} \\
 \frac{ \sigma_{f} }{f} &= \sqrt{ \Big( \frac{\sigma_x}{x} \Big)^2 + \Big( \frac{\sigma_y}{y} \Big)^2 + \Big( \frac{\sigma_z}{z} \Big)^2}
-\end{align}
+\end{align*}
 This means that if $f$ is the product of x, y and z, the resulting relative error $\sigma_{f}/f$ is the square root of the sum of squares of individual relative errors.
 
 \section{Fitting methods}
 A fitting method is a process of constructing a curve, or mathematical function, that best fits to the experimental data.
 The form of the theoretical function needs to be known before the fitting process.
 In general, the form of the theoretical function is a function of one varible $x$ and some parameters $(\theta_1,\theta_2,\dots,\theta_m)$.
-\begin{equation}
+\begin{equation*}
 y = f(x;\theta_1,\theta_2,\dots,\theta_m)
-\end{equation}
+\end{equation*}
 The fitting process is to find the best values of the parameters, which best describe the experimental data.
 Also, the errors of the estimation of the best-fit values need to be calculated.
 In this section, we will introduce two fitting methods: the maximum likelihood method and the $\chi^2$ method.
@@ -253,63 +253,63 @@ In the $\chi^2$ method, the experimental data is a set of points $(x_i,y_i)$, wh
 \subsection{Maximum likelihood method \cite{stat_2}}
 Suppose that we have a sample of n independent observations $\{ x_1, x_2, \dots , x_n \}$, which are from a theoretical probability density function $y = f(x;\theta_1,\theta_2,\dots,\theta_m)$, where $(\theta_1,\theta_2,\dots,\theta_m)$ are the true values of the parameters of the theoretical probability density function.
 The probability of observing a specific sample of n independent observations $\{ x_1, x_2, \dots , x_n \}$ is called the likelihood function $L$ and is calculated by the product of the individual probability.
-\begin{equation}
+\begin{equation*}
 L(\theta_1,\theta_2,\dots,\theta_m;x_1,x_2,\dots,x_n) = \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m)
-\end{equation}
+\end{equation*}
 The principle for finding the best-fit values of the parameters is to maximize the likelihood function $L$.
 Every best-fit values of the parameters need to satisfy the following maximization condition:
 \begin{equation}  \label{likelihood_maximization}
 \frac{\partial L}{\partial \theta_j} = 0 \qquad \text{for } 1 \leq  j \leq m
 \end{equation}
 Depending on the form of $L$, it may also be easier to maximize the logarithm of $L$, rather than $L$ itself.
-\begin{equation}
+\begin{equation*}
 \frac{\partial ( \ln L )}{\partial \theta_j} = 0 \qquad \text{for } 1 \leq  j \leq m
-\end{equation}
+\end{equation*}
 which yields the same results as \ref{likelihood_maximization}.
 By solving the equations, the solution $(\hat{\theta}_1,\hat{\theta}_2,\dots,\hat{\theta}_m)$ are called the maximum likelihood estimator for the parameter $\theta$.
 The caret over the parameters is to distinguish the estimated value from the true value.
 
 It should be realized now that the estimator $\hat{\theta}_j$ is also a random variable, since it is a function of $x_i$.
-\begin{equation}
+\begin{equation*}
 \hat{\theta}_j = \hat{\theta}_j(x_1,x_2,\dots,x_n)
-\end{equation}
+\end{equation*}
 If a second sample is taken, the estimator $\hat{\theta}_j$ will have a different value.
 The estimator $\hat{\theta}_j$ is thus also described by a probability distribution.
 This leads us to the second half of the estimation problem: What is the error of the estimators $\hat{\theta}_j$?
 This is given by the standard deviation of the estimator distribution.
 First, we need to calculate the mean of the estimator distribution, which is given by the equation \ref{first_moment}.
-\begin{align}
+\begin{align*}
 \mu_{\hat{\theta}_j}
 &= E[\hat{\theta}_j(x_1,x_2,\dots,x_n)] \\
 &= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
 &= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) \Big[ \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m) \Big] dx_1 dx_2 \dots dx_n \\
 &= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) L(\theta_1,\theta_2,\dots,\theta_m;x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n
-\end{align}
+\end{align*}
 After the integration, it only depends on the true values of parameters $(\theta_1,\theta_2,\dots,\theta_m)$.
 A estimator with the property that $\mu_{\hat{\theta}_j} = \theta_j$ is called an unbiased estimator.
-In this following text, we assume all estimators are unbiased estimators.
+Otherwise, it is called a biased estimator.
 The variance of the estimator distribution can be calculated by the equation \ref{second_moment}.
-\begin{align}
+\begin{align*}
 \sigma_{\hat{\theta}_j}^2
 &= E[(\hat{\theta}_j - \mu_{\hat{\theta}_j} )^2] \\
 &= \int (\hat{\theta}_j - \mu_{\hat{\theta}_j} )^2 P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
-&= \int (\hat{\theta}_j - \theta_j )^2 \Big[ \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m) \Big] dx_1 dx_2 \dots dx_n
-\end{align}
+&= \int (\hat{\theta}_j - \mu_{\hat{\theta}_j} )^2 \Big[ \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m) \Big] dx_1 dx_2 \dots dx_n
+\end{align*}
 
 \subsubsection{Estimator of Poisson distribution}
 Suppose we have n independent measurements of samples $\{ x_1, x_2, \dots , x_n \}$ from a Poisson distribution with the mean $\lambda$. The likelihood function is
-\begin{align}
+\begin{align*}
 L(\lambda;x_1,x_2,\dots,x_n) &= \prod_{i = 1}^{n} \frac{\lambda^{x_i}}{x_i !} \exp(-\lambda) \\
 &= \exp(-n \lambda) \prod_{i = 1}^{n} \frac{\lambda^{x_i}}{x_i !} \\
 \ln L &= -n \lambda + \sum_{i = 1}^{n} x_i \ln(\lambda) - \sum_{i = 1}^{n} \ln(x_i !) \\
 &= -n \lambda + \ln(\lambda) \sum_{i = 1}^{n} x_i - \sum_{i = 1}^{n} \ln(x_i !)
-\end{align}
+\end{align*}
 Differentiating and setting the result to zero, we then find
-\begin{align}
+\begin{align*}
 \frac{\partial ( \ln L )}{\partial \lambda} = -n + \frac{1}{\lambda} \sum_{i = 1}^{n} x_i &= 0 \\
 \hat{\lambda} &= \frac{1}{n} \sum_{i = 1}^{n} x_i \\
 \hat{\lambda} &= \bar{x}
-\end{align}
+\end{align*}
 The estimator of $\hat{\lambda}$ is just the sample mean $\bar{x}$.
 
 To calculate the error of the estimator, we need to first calculate the mean of estimator $\mu_{\hat{\lambda}}$. (or see appendix \ref{proof_mean})
@@ -324,7 +324,14 @@ To calculate the error of the estimator, we need to first calculate the mean of 
 &= \frac{1}{n} (n \lambda) \\
 &= \lambda
 \end{align*}
-Therefore, the estimator $\hat{\lambda}$ is an unbiased estimator. The variance is
+Therefore, the estimator $\hat{\lambda}$ is an unbiased estimator.
+The reader may have noticed that the derivation of the result
+\begin{equation} \label{mean_of_sample_mean}
+E[\bar{x}]  = \mu
+\end{equation}
+is independent of the probability density function (Poisson distribution in this case, $\mu=\lambda$), and hence this is a general result.
+
+The variance is
 \begin{align*}
 \sigma_{\hat{\lambda}}^2
 &= E[(\hat{\lambda} - \mu_{\hat{\lambda}} )^2] \\
@@ -335,15 +342,26 @@ Therefore, the estimator $\hat{\lambda}$ is an unbiased estimator. The variance 
 &= \frac{1}{n^2} E\Bigg [ \Bigg( \sum_{i=1}^n (x_i - \lambda) \Bigg)^2 \Bigg] \\
 &= \frac{1}{n^2} E\Bigg [ \Bigg( \sum_{i=1}^n (x_i - \lambda) \Bigg) \Bigg( \sum_{j=1}^n (x_j - \lambda) \Bigg) \Bigg] \\
 &= \frac{1}{n^2} E\Bigg [ \sum_{i=1}^n \sum_{j=1}^n (x_i - \lambda) (x_j - \lambda) \Bigg] \\
-&= \frac{1}{n^2} E\Bigg [ \sum_{i=1}^n (x_i - \lambda)^2 +  \sum_{i \neq j} (x_i - \lambda) (x_j - \lambda) \Bigg] \\
-&= \frac{1}{n^2} \sum_{i=1}^n    E[ (x_i - \lambda)^2 ]
-+  \frac{1}{n^2} \sum_{i \neq j} E[ (x_i - \lambda) (x_j - \lambda) ] \\
-&= \frac{1}{n^2} \sum_{i=1}^n \sigma^2
-+  \frac{1}{n^2} \sum_{i \neq j} E[x_i - \lambda] E[x_j - \lambda] \\
-&= \frac{1}{n^2} (n \sigma^2)
-+  \frac{1}{n^2} \sum_{i \neq j} (E[x_i] - E[\lambda])( E[x_j] - E[\lambda]) \\
-&= \frac{\sigma^2}{n}
-+  \frac{1}{n^2} \sum_{i \neq j} (\lambda - \lambda)(\lambda - \lambda) \\
+&= \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n E[ (x_i - \lambda) (x_j - \lambda) ] \\
+\end{align*}
+The last term is just a covariance. Because $\{ x_1, x_2, \dots , x_n \}$ are independent, $E[f(x_1)g(x_2)] = E[f(x_1)] E[g(x_2)]$.
+\begin{align}
+\sum_{i=1}^n \sum_{j=1}^n E [ (x_i - \lambda) (x_j - \lambda) ]
+&= \sum_{i=1}^n    E[ (x_i - \lambda)^2 ]
++  \sum_{i \neq j} E[ (x_i - \lambda) (x_j - \lambda) ] \\
+&= \sum_{i=1}^n \sigma^2
++  \sum_{i \neq j} E[x_i - \lambda] E[x_j - \lambda] \\
+&= (n \sigma^2)
++  \sum_{i \neq j} (E[x_i] - E[\lambda])( E[x_j] - E[\lambda]) \\
+&= n \sigma^2
++  \sum_{i \neq j} (\lambda - \lambda)(\lambda - \lambda) \\
+&= n \sigma^2 \label{expectation_covariance}
+\end{align}
+The variance then is
+\begin{align*}
+\sigma_{\hat{\lambda}}^2
+&= \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n E[ (x_i - \lambda) (x_j - \lambda) ] \\
+&= \frac{1}{n^2} (n \sigma^2) \\
 &= \frac{\sigma^2}{n} \\
 \sigma_{\hat{\lambda}} &= \frac{\sigma}{\sqrt{n}} = \sqrt{\frac{\lambda}{n}}
 \end{align*}
@@ -354,7 +372,11 @@ The theoretical mean $\lambda$ can be estimated by $\hat{\lambda}$.
 &\approx \sqrt{\frac{\hat{\lambda}}{n}} \\
 &= \sqrt{\frac{\bar{x}}{n}}
 \end{align*}
-The reader may have noticed that the derivation of the result that $E[(\bar{x} - \mu )^2] = \sigma^2 /n$ is independent of the probability density function (Poisson distribution in this case, $\mu=\lambda$, $\sigma^2=\lambda$), and hence this is a general result. This result also justifies equation \ref{standart_dev}.
+The reader may have noticed that the derivation of the result
+\begin{equation} \label{error_of_sample_mean}
+E[(\bar{x} - \mu )^2] = \frac{\sigma^2}{n}
+\end{equation}
+is independent of the probability density function (Poisson distribution in this case, $\mu=\lambda$, $\sigma^2=\lambda$), and hence this is a general result. This result also justifies the equation \ref{standart_dev}.
 
 \subsection{$\chi^2$ method}
 The $\chi^2$ method is useful for testing how good the fit is.
@@ -373,9 +395,9 @@ Every best-fit values of the parameters need to satisfy the following minimizati
 We can use the linear fit as an example for using the $\chi^2$ method.
 Suppose the fitting function is $y = f(x;a,b) = ax + b$, with the parameters a and b.
 By the equation \ref{chi_square_formula}, the $\chi^2$ is
-\begin{equation}
+\begin{equation*}
 \chi^2 = \sum_{i = 1}^{n} \Big ( \frac{y_i - a x_i - b}{\sigma_i} \Big )^2
-\end{equation}
+\end{equation*}
 To find the best-fit values of a and b, by the equation \ref{chi_minimisation_condition}, we need to solve the following system of equations:
 \begin{equation} \label{equation_a}
 \frac{\partial \chi^2}{\partial a} = -2 \sum_{i = 1}^{n} \frac{ (y_i - a x_i - b) x_i }{\sigma_i^2} = 0
@@ -395,26 +417,26 @@ S_{yy} = \sum_{i = 1}^{n} \frac{y_i^2}{\sigma_i^2} \qquad
 S_{xy} = \sum_{i = 1}^{n} \frac{x_i y_i}{\sigma_i^2}
 \end{equation*}
 Equations \ref{equation_a} and \ref{equation_b} can be simplified to
-\begin{equation}
+\begin{equation*}
 -2(S_{xy} - a S_{xx} - b S_x) = 0
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 -2(S_y - a S_x - b S_0) = 0
-\end{equation}
+\end{equation*}
 By solving the liner equations, the best-fit values of a and b are
-\begin{equation}
+\begin{equation*}
 a = \frac{S_0 S_{xy} - S_x S_y}{S_0 S_{xx} - S_x^2}
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 b = \frac{S_y S_{xx} - S_x S_{xy}}{S_0 S_{xx} - S_x^2}
-\end{equation}
+\end{equation*}
 The errors of a and b are given by the further reading \cite{stat_2}.
-\begin{equation}
+\begin{equation*}
 \sigma_a^2 = \frac{S_0}{S_0 S_{xx} - S_x^2}
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
 \sigma_b^2 = \frac{S_{xx}}{S_0 S_{xx} - S_x^2}
-\end{equation}
+\end{equation*}
 To measure the quality of the fit, we can divide the $\chi^2$ by the degree of freedom $n-2$.
 \begin{equation} \label{reduced_chi_square}
 \frac{\chi^2}{n-2}
@@ -439,13 +461,13 @@ The histogram allows us to measure the mean value $\bar{x}$ and its standard dev
 \end{figure}
 
 Final result with confidence interval of confidence level $\alpha = 66 \%$ is
-\begin{equation}
+\begin{equation*}
 x = \bar{x} \pm \sqrt{ (\sigma_{stat})^2 + (\sigma_{syst})^2 }
-\end{equation}
+\end{equation*}
 Final result with confidence interval of $\alpha = 95 \%$ is
-\begin{equation} \label{error_offline}
+\begin{equation*}
 x = \bar{x} \pm \sqrt{ (2\sigma_{stat})^2 + (\sigma_{syst})^2}
-\end{equation}
+\end{equation*}
 
 
 
