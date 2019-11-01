@@ -378,6 +378,87 @@ E[(\bar{x} - \mu )^2] = \frac{\sigma^2}{n}
 \end{equation}
 is independent of the probability density function (Poisson distribution in this case, $\mu=\lambda$, $\sigma^2=\lambda$), and hence this is a general result. This result also justifies the equation \ref{standart_dev}.
 
+\subsubsection{Estimators of Gaussian distribution}
+Suppose we have n independent measurements of samples $\{ x_1, x_2, \dots , x_n \}$ from a Gaussian distribution. The likelihood function is
+\begin{align*}
+L(\mu, \sigma^2 ;x_1,x_2,\dots,x_n) &= \prod_{i = 1}^{n} \frac{1}{\sigma \sqrt{2\pi}} \exp \Bigg[ - \frac{(x_i-\mu)^2}{2\sigma^2} \Bigg]
+\end{align*}
+\begin{align*}
+\ln L
+&= -\frac{n}{2} \ln(2 \pi \sigma^2) - \frac{1}{2} \sum_{i = 1}^{n} \frac{(x_i - \mu)^2}{\sigma^2}
+\end{align*}
+Differentiating with respect to $\mu$ and setting the result to zero, we then find
+\begin{align*}
+\frac{\partial ( \ln L )}{\partial \mu} =
+\sum_{i = 1}^{n} \frac{x_i - \mu}{\sigma^2} &= 0 \\
+\sum_{i = 1}^{n} (x_i - \mu) &= 0 \\
+\Bigg(\sum_{i = 1}^{n} x_i \Bigg) - n \mu &= 0 \\
+\hat{\mu} &= \frac{1}{n} \sum_{i = 1}^{n} x_i \\
+\hat{\mu} &= \bar{x}
+\end{align*}
+By equation \ref{mean_of_sample_mean} and \ref{error_of_sample_mean}, the error of $\hat{\mu}$ is
+\begin{align}
+\sigma_{\hat{\mu}}^2
+&= E[(\hat{\mu} - \mu_{\hat{\mu}} )^2] \\
+&= E[(\bar{x} - \mu )^2] \\
+&= \frac{\sigma^2}{n} \\
+\sigma_{\hat{\mu}} &= \frac{\sigma}{\sqrt{n}} \\
+&\approx \frac{\hat{\sigma}}{\sqrt{n}} \label{error_of_estimator_mu}
+\end{align}
+The theoretical standard derivation $\sigma$ is unknown, but can be estimated by $\hat{\sigma}$.
+Differentiating $\ln L$ with respect to $\sigma^2$ and setting the result to zero, $\hat{\sigma}$ can be found.
+\begin{align*}
+\frac{\partial ( \ln L )}{\partial \sigma^2} =
+-\frac{n}{2 \sigma^2} + \frac{1}{2} \sum_{i = 1}^{n} \frac{(x_i - \mu)^2}{\sigma^2} \frac{1}{\sigma^2} &= 0 \\
+-n + \frac{1}{\sigma^2} \sum_{i = 1}^{n} (x_i - \mu)^2 &= 0 \\
+\hat{\sigma}^2 &= \frac{1}{n} \sum_{i = 1}^{n} (x_i - \mu)^2 \\
+&\approx \frac{1}{n} \sum_{i = 1}^{n} (x_i - \hat{\mu})^2 \\
+&= \frac{1}{n} \sum_{i = 1}^{n} (x_i - \bar{x})^2
+\end{align*}
+By \ref{error_of_estimator_mu}, the error of $\hat{\mu}$ can be estimated by
+\begin{align*}
+\sigma_{\hat{\mu}}
+&\approx \frac{\hat{\sigma}}{\sqrt{n}} \\
+&= \frac{1}{\sqrt{n}} \sqrt{ \frac{1}{n} \sum_{i = 1}^{n} (x_i - \bar{x})^2 }
+\end{align*}
+The mean of the estimator $\hat{\sigma}^2$ is
+\begin{align*}
+\mu_{\hat{\sigma}^2}
+&= E \Bigg[ \frac{1}{n} \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg] \\
+&= \frac{1}{n} \sum_{i = 1}^{n} E [(x_i - \bar{x})^2] \\
+&= \frac{1}{n} \sum_{i = 1}^{n} E [((x_i - \mu) - (\bar{x} - \mu))^2] \\
+&= \frac{1}{n} \sum_{i = 1}^{n} E [(x_i - \mu)^2 + (\bar{x} - \mu)^2 - 2 (x_i - \mu)(\bar{x} - \mu)] \\
+&= \frac{1}{n} \sum_{i = 1}^{n} E [(x_i - \mu)^2]
++ \frac{1}{n} \sum_{i = 1}^{n} E [(\bar{x} - \mu)^2]
+- \frac{2}{n} \sum_{i = 1}^{n} E [(x_i - \mu)(\bar{x} - \mu)] \\
+&= \frac{1}{n} \sum_{i = 1}^{n} \sigma^2
++ \frac{1}{n} \sum_{i = 1}^{n} \frac{\sigma^2}{n}
+- \frac{2}{n} \sum_{i = 1}^{n} E [(x_i - \mu)(\bar{x} - \mu)] \\
+\end{align*}
+\begin{align*}
+\sum_{i = 1}^{n} E [(x_i - \mu)(\bar{x} - \mu)]
+&= \sum_{i = 1}^{n} E \Bigg[ (x_i - \mu) \Bigg( \Bigg( \frac{1}{n} \sum_{j = 1}^{n} x_j \Bigg) - \mu \Bigg) \Bigg] \\
+&= \sum_{i = 1}^{n} E \Bigg[ (x_i - \mu) \frac{1}{n} \sum_{j = 1}^{n} (x_j - \mu) \Bigg] \\
+&= \frac{1}{n}\sum_{i = 1}^{n} \sum_{j = 1}^{n} E[ (x_i - \mu) (x_j - \mu) ] \\
+&= \frac{1}{n} (n \sigma^2) \\
+&= \sigma^2
+\end{align*}
+The last step is by equation \ref{expectation_covariance}. The mean of the estimator $\hat{\sigma}^2$ is
+\begin{align*}
+\mu_{\hat{\sigma}^2}
+&= \frac{1}{n} \sum_{i = 1}^{n} \sigma^2
++  \frac{1}{n} \sum_{i = 1}^{n} \frac{\sigma^2}{n}
+-  \frac{2}{n} \sigma^2 \\
+&= \sigma^2
++  \frac{\sigma^2}{n}
+-  \frac{2\sigma^2}{n} \\
+&= \sigma^2 - \frac{\sigma^2}{n} \\
+&= \frac{(n-1)\sigma^2}{n} \\
+\end{align*}
+Hence, the estimator $\hat{\sigma}^2$ is a biased estimator. Sometimes, it is better the following equation to estimate $\sigma$.
+
+This result also justifies the equation \ref{sample_standard_dev}.
+
 \subsection{$\chi^2$ method}
 The $\chi^2$ method is useful for testing how good the fit is.
 $\chi^2$ analysis \cite{stat_2, BAKER1984437, reduced_chi_squared} is based on minimizing the difference between experimental data and the fitting function. Suppose that we have a series of experimental data $(x_i,y_i)$ with the error of $y_i$ denoted by $\sigma_i$, and we use a fitting function $y = f(x;\theta_1,\theta_2,\dots,\theta_m)$ to fit the experimental data $y_i$ by varing different values of the m parameters $\theta_j$. The deviation bewteen the experimental data and the fitting curve can be measured by the following quantity $\chi^2$:
