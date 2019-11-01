@@ -60,23 +60,40 @@ p(x_1 \leq x \leq x_2) = \sum_{x = x_1}^{x_2} P(x)
 \subsection{Moments of distribution}
 Theoretical mean value $\mu$ of variable $x$ is defined as the first moment about zero of the distribution $P(x)$. Mathematically it can be expressed in the following way:
 \begin{equation} \label{first_moment}
-\mu = \int x P(x) dx
+\mu = E[x] = \int x P(x) dx
 \end{equation}
 The variance of the distribution $\sigma^2$ is defined as a second moment about the mean value:
 \begin{equation} \label{second_moment}
-\sigma^2 = \int (x-\mu)^2P(x)dx
+\sigma^2 = E[(x-\mu)^2] = \int (x-\mu)^2P(x)dx
 \end{equation}
-It has a meaning of average squared deviation of variable \enquote{x} from its mean value $\mu$. Square root of variance, $\sigma$, is called standard deviation, and used to describe the width of the distribution. Value of $\sigma$ allows to judge about the magnitude of fluctuation of random variable \enquote{x} around its mean value $\sigma$. Also one can introduce higher moments of distribution, but they are rarely used in experimental physics. In case of discrete distributions, integration in equations (\ref{first_moment}, \ref{second_moment}) should be changed to summation.
+It has a meaning of average squared deviation of variable \enquote{x} from its mean value $\mu$. Square root of variance, $\sigma$, is called standard deviation, and used to describe the width of the distribution. Value of $\sigma$ allows to judge about the magnitude of fluctuation of random variable \enquote{x} around its mean value $\sigma$. Also one can introduce higher moments of distribution, but they are rarely used in experimental physics.
+
+Another important definition which we will make use of later is the expectation value of a random variable $E[x]$ or a random variable function $E[f(x)]$.
+\begin{equation} \label{expectation_value}
+E[f(x)] =  \int f(x) P(x) dx
+\end{equation}
+
+In the case of discrete distributions, integration in equations \ref{first_moment}, \ref{second_moment} and \ref{expectation_value} should be changed to summation.
 \begin{equation}
-\mu = \sum_i x_i P(x_i)
+E[f(x)] =  \sum_i f(x_i) P(x_i)
 \end{equation}
 \begin{equation}
-\sigma^2 = \sum_i (x_i-\mu)^2P(x_i)
+\mu = E[x] = \sum_i x_i P(x_i)
 \end{equation}
-Students are welcome to study literature for more information about it \cite{stat_1, stat_2, stat_3}. \\
+\begin{equation}
+\sigma^2 = E[(x-\mu)^2] = \sum_i (x_i-\mu)^2P(x_i)
+\end{equation}
+Students are welcome to study literature for more information about it \cite{stat_1, stat_2, stat_3}.
+
+In the case of random multi-variable $(x_1,x_2,\dots,x_n)$ with a multivariate distribution $P(x_1,x_2,\dots,x_n)$, the definition of expectation value can be generalized.
+\begin{align}
+E[f(x_1,x_2,\dots,x_n)] &=  \int f(x_1,x_2,\dots,x_n) P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
+E[f(x_1,x_2,\dots,x_n)] &=  \sum_{x_1} \sum_{x_2} \dots \sum_{x_n} f(x_1,x_2,\dots,x_n) P(x_1,x_2,\dots,x_n)
+\end{align}
+
 The correlation (dependency) between parameters $x$ and $y$ is described by covariance:
 \begin{equation} \label{cov}
-cov(x,y) = \int (x-\mu_x)(y-\mu_y)P(x,y)dxdy
+cov(x,y) = E[(x-\mu_x)(y-\mu_y)] = \int (x-\mu_x)(y-\mu_y)P(x,y)dxdy
 \end{equation}
 where $P(x,y)$ is a 2-dimensional distribution of variables \enquote{x} and \enquote{y}. It is also convenient to introduce correlation coefficient $\rho$ ($\rho \in [-1; 1]$):
 \begin{equation} \label{rho}
@@ -262,7 +279,9 @@ This leads us to the second half of the estimation problem: What is the error of
 This is given by the standard deviation of the estimator distribution.
 First, we need to calculate the mean of the estimator distribution, which is given by the equation \ref{first_moment}.
 \begin{align}
-\mu_{\hat{\theta}_j} &= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
+\mu_{\hat{\theta}_j}
+&= E[\hat{\theta}_j(x_1,x_2,\dots,x_n)] \\
+&= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
 &= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) \Big[ \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m) \Big] dx_1 dx_2 \dots dx_n \\
 &= \int \hat{\theta}_j(x_1,x_2,\dots,x_n) L(\theta_1,\theta_2,\dots,\theta_m;x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n
 \end{align}
@@ -271,12 +290,14 @@ A estimator with the property that $\mu_{\hat{\theta}_j} = \theta_j$ is called a
 In this following text, we assume all estimators are unbiased estimators.
 The variance of the estimator distribution can be calculated by the equation \ref{second_moment}.
 \begin{align}
-\sigma_{\hat{\theta}_j}^2 &= \int (\hat{\theta}_j - \mu_{\hat{\theta}_j} )^2 P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
+\sigma_{\hat{\theta}_j}^2
+&= E[(\hat{\theta}_j - \mu_{\hat{\theta}_j} )^2] \\
+&= \int (\hat{\theta}_j - \mu_{\hat{\theta}_j} )^2 P(x_1,x_2,\dots,x_n) dx_1 dx_2 \dots dx_n \\
 &= \int (\hat{\theta}_j - \theta_j )^2 \Big[ \prod_{i = 1}^{n} f(x_i;\theta_1,\theta_2,\dots,\theta_m) \Big] dx_1 dx_2 \dots dx_n
 \end{align}
 
 \subsubsection{Estimator of Poisson distribution}
-Suppose we have n independent measurements of samples $\{ x_1, x_2, \dots , x_n \}$ from a Poisson distribution with mean $lambda$. The likelihood function is
+Suppose we have n independent measurements of samples $\{ x_1, x_2, \dots , x_n \}$ from a Poisson distribution with the mean $\lambda$. The likelihood function is
 \begin{align}
 L(\lambda;x_1,x_2,\dots,x_n) &= \prod_{i = 1}^{n} \frac{\lambda^{x_i}}{x_i !} \exp(-\lambda) \\
 &= \exp(-n \lambda) \prod_{i = 1}^{n} \frac{\lambda^{x_i}}{x_i !} \\
@@ -291,8 +312,49 @@ Differentiating and setting the result to zero, we then find
 \end{align}
 The estimator of $\hat{\lambda}$ is just the sample mean $\bar{x}$.
 
-To calculate the error of the estimator, we need to first calculate the mean of estimator $\mu_{\hat{\lambda}}$.
-By the appendix \ref{proof}, $\mu_{\hat{\lambda}} = \mu_{\bar{x}} = \mu = \lambda$, therefore the estimator $\hat{\lambda}$ is an unbiased estimator.
+To calculate the error of the estimator, we need to first calculate the mean of estimator $\mu_{\hat{\lambda}}$. (or see appendix \ref{proof_mean})
+\begin{align*}
+\mu_{\hat{\lambda}}
+&= E[\hat{\lambda}] \\
+&= E[\bar{x}] \\
+&= E \Bigg[ \frac{1}{n} \sum_{i=1}^n x_i \Bigg] \\
+&= \frac{1}{n} E \Bigg[ \sum_{i=1}^n x_i \Bigg] \\
+&= \frac{1}{n} \sum_{i=1}^n E[x_i] \\
+&= \frac{1}{n} \sum_{i=1}^n \lambda \\
+&= \frac{1}{n} (n \lambda) \\
+&= \lambda
+\end{align*}
+Therefore, the estimator $\hat{\lambda}$ is an unbiased estimator. The variance is
+\begin{align*}
+\sigma_{\hat{\lambda}}^2
+&= E[(\hat{\lambda} - \mu_{\hat{\lambda}} )^2] \\
+&= E[(\hat{\lambda} - \lambda )^2] \\
+&= E[(\bar{x} - \lambda )^2] \\
+&= E\Bigg [ \Bigg( \Bigg( \frac{1}{n} \sum_{i=1}^n x_i \Bigg) - \lambda \Bigg)^2 \Bigg] \\
+&= E\Bigg [ \Bigg( \frac{1}{n} \sum_{i=1}^n (x_i - \lambda) \Bigg)^2 \Bigg] \\
+&= \frac{1}{n^2} E\Bigg [ \Bigg( \sum_{i=1}^n (x_i - \lambda) \Bigg)^2 \Bigg] \\
+&= \frac{1}{n^2} E\Bigg [ \Bigg( \sum_{i=1}^n (x_i - \lambda) \Bigg) \Bigg( \sum_{j=1}^n (x_j - \lambda) \Bigg) \Bigg] \\
+&= \frac{1}{n^2} E\Bigg [ \sum_{i=1}^n \sum_{j=1}^n (x_i - \lambda) (x_j - \lambda) \Bigg] \\
+&= \frac{1}{n^2} E\Bigg [ \sum_{i=1}^n (x_i - \lambda)^2 +  \sum_{i \neq j} (x_i - \lambda) (x_j - \lambda) \Bigg] \\
+&= \frac{1}{n^2} \sum_{i=1}^n    E[ (x_i - \lambda)^2 ]
++  \frac{1}{n^2} \sum_{i \neq j} E[ (x_i - \lambda) (x_j - \lambda) ] \\
+&= \frac{1}{n^2} \sum_{i=1}^n \sigma^2
++  \frac{1}{n^2} \sum_{i \neq j} E[x_i - \lambda] E[x_j - \lambda] \\
+&= \frac{1}{n^2} (n \sigma^2)
++  \frac{1}{n^2} \sum_{i \neq j} (E[x_i] - E[\lambda])( E[x_j] - E[\lambda]) \\
+&= \frac{\sigma^2}{n}
++  \frac{1}{n^2} \sum_{i \neq j} (\lambda - \lambda)(\lambda - \lambda) \\
+&= \frac{\sigma^2}{n} \\
+\sigma_{\hat{\lambda}} &= \frac{\sigma}{\sqrt{n}} = \sqrt{\frac{\lambda}{n}}
+\end{align*}
+The theoretical mean $\lambda$ can be estimated by $\hat{\lambda}$.
+\begin{align*}
+\sigma_{\hat{\lambda}}
+&= \sqrt{\frac{\lambda}{n}} \\
+&\approx \sqrt{\frac{\hat{\lambda}}{n}} \\
+&= \sqrt{\frac{\bar{x}}{n}}
+\end{align*}
+The reader may have noticed that the derivation of the result that $E[(\bar{x} - \mu )^2] = \sigma^2 /n$ is independent of the probability density function (Poisson distribution in this case, $\mu=\lambda$, $\sigma^2=\lambda$), and hence this is a general result. This result also justifies equation \ref{standart_dev}.
 
 \subsection{$\chi^2$ method}
 The $\chi^2$ method is useful for testing how good the fit is.
@@ -409,7 +471,7 @@ To successfully pass the lab, a student must complete the following tasks:
 \item Other questions
 \end{enumerate}
 
-\section{Appendix: Proof that the mean of the sample mean is the population mean} \label{proof}
+\section{Appendix: Proof that the mean of the sample mean is the population mean} \label{proof_mean}
 Prove by the first principle (discrete variable):
 \begin{align*}
 \mu_{\bar{x}}
@@ -439,16 +501,6 @@ Prove by the first principle (discrete variable):
 &+ \frac{\mu}{n} (1) (1) \dots (1) \\
 & \qquad \vdots \\
 &+ \frac{\mu}{n} (1) (1) \dots (1) \\
-&= \mu
-\end{align*}
-Prove by the expected value:
-\begin{align*}
-E(\bar{x})
-&= E \Bigg( \frac{1}{n} \sum_{i=1}^n x_i \Bigg) \\
-&= \frac{1}{n} E \Bigg( \sum_{i=1}^n x_i \Bigg) \\
-&= \frac{1}{n} \sum_{i=1}^n E(x_i) \\
-&= \frac{1}{n} \sum_{i=1}^n \mu \\
-&= \frac{1}{n} (n \mu) \\
 &= \mu
 \end{align*}
 
