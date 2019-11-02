@@ -415,12 +415,6 @@ Differentiating $\ln L$ with respect to $\sigma^2$ and setting the result to zer
 &\approx \frac{1}{n} \sum_{i = 1}^{n} (x_i - \hat{\mu})^2 \\
 &= \frac{1}{n} \sum_{i = 1}^{n} (x_i - \bar{x})^2
 \end{align*}
-By \ref{error_of_estimator_mu}, the error of $\hat{\mu}$ can be estimated by
-\begin{align*}
-\sigma_{\hat{\mu}}
-&\approx \frac{\hat{\sigma}}{\sqrt{n}} \\
-&= \frac{1}{\sqrt{n}} \sqrt{ \frac{1}{n} \sum_{i = 1}^{n} (x_i - \bar{x})^2 }
-\end{align*}
 The mean of the estimator $\hat{\sigma}^2$ is
 \begin{align*}
 \mu_{\hat{\sigma}^2}
@@ -455,9 +449,31 @@ The last step is by equation \ref{expectation_covariance}. The mean of the estim
 &= \sigma^2 - \frac{\sigma^2}{n} \\
 &= \frac{(n-1)\sigma^2}{n} \\
 \end{align*}
-Hence, the estimator $\hat{\sigma}^2$ is a biased estimator. Sometimes, it is better the following equation to estimate $\sigma$.
-
+Hence, the estimator $\hat{\sigma}^2$ is a biased estimator. Sometimes, it is better to use the following equation to estimate $\sigma$.
+\begin{align*}
+\hat{\sigma}^2 &\approx \mu_{\hat{\sigma}^2} \\
+\frac{1}{n} \sum_{i = 1}^{n} (x_i - \bar{x})^2 &\approx \frac{(n-1)\sigma^2}{n} \\
+\sigma^2 &\approx \frac{1}{n-1} \sum_{i = 1}^{n} (x_i - \bar{x})^2 \\
+\end{align*}
 This result also justifies the equation \ref{sample_standard_dev}.
+We can re-define the estimator $\hat{\sigma}^2$.
+\begin{equation} \label{estimator_sigma_redefinition}
+\hat{\sigma}^2 = \frac{1}{n-1} \sum_{i = 1}^{n} (x_i - \bar{x})^2
+\end{equation}
+Hence, the estimator $\hat{\sigma}^2$ defined by equation \ref{estimator_sigma_redefinition} is an unbiased estimator.
+\begin{equation*}
+\mu_{\hat{\sigma^2}} = \sigma^2
+\end{equation*}
+The error of $\hat{\mu}$ in equation \ref{error_of_estimator_mu} can then be estimated by
+\begin{align*}
+\sigma_{\hat{\mu}}
+&\approx \frac{\hat{\sigma}}{\sqrt{n}} \\
+&= \frac{1}{\sqrt{n}} \sqrt{ \frac{1}{n-1} \sum_{i = 1}^{n} (x_i - \bar{x})^2 }
+\end{align*}
+Finally, we need to calculate the error of the estimator $\hat{\sigma}^2$ defined by equation \ref{estimator_sigma_redefinition}. It is calculated in the appendix \ref{proof_variance}.
+\begin{equation*}
+\sigma_{\hat{\sigma^2}}^2 = \frac{2\sigma^4}{n-1}
+\end{equation*}
 
 \subsection{$\chi^2$ method}
 The $\chi^2$ method is useful for testing how good the fit is.
@@ -605,6 +621,211 @@ Prove by the first principle (discrete variable):
 & \qquad \vdots \\
 &+ \frac{\mu}{n} (1) (1) \dots (1) \\
 &= \mu
+\end{align*}
+
+\section{Appendix: Prove the variance of $\hat{\sigma^2}$} \label{proof_variance}
+\begin{align}
+\sigma_{\hat{\sigma^2}}^2
+&= E[(\hat{\sigma^2} - \mu_{\hat{\sigma^2}} )^2] \\
+&= E \Bigg[ \Bigg( \Bigg( \frac{1}{n-1} \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg) - \sigma^2 \Bigg)^2 \Bigg] \\
+&= E \Bigg[ \Bigg( \frac{1}{n-1} \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg)^2 \Bigg]
+-2 \sigma^2 E \Bigg[ \frac{1}{n-1} \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg] + \sigma^4 \\
+&= \frac{1}{(n-1)^2} E \Bigg[ \Bigg( \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg)^2 \Bigg]
+-2 \sigma^2 \sigma^2 + \sigma^4 \\
+&= \frac{1}{(n-1)^2} E \Bigg[ \Bigg( \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg)^2 \Bigg] - \sigma^4 \label{proof_variance_origin1}
+\end{align}
+\begin{align}
+&E \Bigg[ \Bigg( \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg)^2 \Bigg] \\
+&= E \Bigg[ \Bigg( \sum_{i = 1}^{n} \Big[ (x_i - \mu) - (\bar{x} - \mu) \Big]^2 \Bigg)^2 \Bigg] \\
+&= E \Bigg[ \Bigg( \sum_{i = 1}^{n} \Big[ (x_i - \mu)^2 + (\bar{x} - \mu)^2 - 2 (x_i - \mu)(\bar{x} - \mu) \Big] \Bigg)^2 \Bigg] \\
+&= E \Bigg[ \sum_{i = 1}^{n} \sum_{j = 1}^{n} \Big[ (x_i - \mu)^2 + (\bar{x} - \mu)^2 - 2 (x_i - \mu)(\bar{x} - \mu) \Big] \Big[ (x_j - \mu)^2 + (\bar{x} - \mu)^2 - 2 (x_j - \mu)(\bar{x} - \mu) \Big] \Bigg] \\
+&= \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (x_j - \mu)^2]
++  \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(\bar{x} - \mu)^4]
++4 \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu) (x_j - \mu) (\bar{x} - \mu)^2] \\
+&+2\sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (\bar{x} - \mu)^2]
+-4 \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu) (\bar{x} - \mu)^3]
+-4 \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (x_j - \mu) (\bar{x} - \mu)] \\
+&= \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (x_j - \mu)^2]
++  n^2 E[(\bar{x} - \mu)^4]
++4 \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu) (x_j - \mu) (\bar{x} - \mu)^2] \\
+&+2n \sum_{i = 1}^{n} E[(x_i - \mu)^2 (\bar{x} - \mu)^2]
+-4n  \sum_{i = 1}^{n} E[(x_i - \mu) (\bar{x} - \mu)^3]
+-4 \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (x_j - \mu) (\bar{x} - \mu)]  \label{proof_variance_origin2}
+\end{align}
+
+Calculate term 2 to term 6 respectively. \\
+Term 2
+\begin{align}
+& E[(\bar{x} - \mu)^4] \\
+&=E \Bigg[ \Bigg( \Bigg( \frac{1}{n} \sum_{i=1}^n x_i \Bigg) - \mu \Bigg)^4 \Bigg] \\
+&=E \Bigg[ \Bigg( \frac{1}{n} \sum_{i=1}^n (x_i - \mu) \Bigg)^4 \Bigg] \\
+&=\frac{1}{n^4} E \Bigg[ \Bigg(\sum_{i=1}^n (x_i - \mu) \Bigg)^4 \Bigg] \\
+&=\frac{1}{n^4} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)] \label{proof_variance_term2}
+\end{align}
+Term 3
+\begin{align}
+& \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu) (x_j - \mu) (\bar{x} - \mu)^2] \\
+&=\sum_{i = 1}^{n} \sum_{j = 1}^{n} E\Bigg[ (x_i - \mu) (x_j - \mu) \Bigg( \Bigg( \frac{1}{n} \sum_{k=1}^n x_k \Bigg) - \mu \Bigg)^2 \Bigg] \\
+&=\sum_{i = 1}^{n} \sum_{j = 1}^{n} E\Bigg[ (x_i - \mu) (x_j - \mu) \Bigg( \frac{1}{n} \sum_{k=1}^n (x_k - \mu) \Bigg)^2 \Bigg] \\
+&=\frac{1}{n^2} \sum_{i = 1}^{n} \sum_{j = 1}^{n} E\Bigg[ (x_i - \mu) (x_j - \mu) \Bigg( \sum_{k=1}^n (x_k - \mu) \Bigg)^2 \Bigg] \\
+&=\frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)]  \label{proof_variance_term3}
+\end{align}
+Term 4
+\begin{align}
+& \sum_{i = 1}^{n} E[(x_i - \mu)^2 (\bar{x} - \mu)^2] \\
+&=\sum_{i = 1}^{n} E \Bigg[ (x_i - \mu)^2 \Bigg( \Bigg( \frac{1}{n} \sum_{j=1}^n x_j \Bigg) - \mu \Bigg)^2 \Bigg] \\
+&=\sum_{i = 1}^{n} E \Bigg[ (x_i - \mu)^2 \Bigg( \frac{1}{n} \sum_{j=1}^n (x_j - \mu) \Bigg)^2 \Bigg] \\
+&=\frac{1}{n^2} \sum_{i = 1}^{n} E \Bigg[ (x_i - \mu)^2 \Bigg( \sum_{j=1}^n (x_j - \mu) \Bigg)^2 \Bigg] \\
+&=\frac{1}{n^2} \sum_{i = 1}^{n} \sum_{j = 1}^{n} \sum_{k = 1}^{n} E[ (x_i - \mu)^2 (x_j - \mu) (x_k - \mu) ]  \label{proof_variance_term4}
+\end{align}
+Term 5
+\begin{align}
+& \sum_{i = 1}^{n} E[(x_i - \mu) (\bar{x} - \mu)^3] \\
+&=\sum_{i = 1}^{n} E \Bigg[(x_i - \mu) \Bigg( \Bigg( \frac{1}{n} \sum_{j=1}^n x_j \Bigg) - \mu \Bigg)^3 \Bigg] \\
+&=\sum_{i = 1}^{n} E \Bigg[(x_i - \mu) \Bigg( \frac{1}{n} \sum_{j=1}^n (x_j - \mu) \Bigg)^3 \Bigg] \\
+&=\frac{1}{n^3} \sum_{i = 1}^{n} E \Bigg[(x_i - \mu) \Bigg( \sum_{j=1}^n (x_j - \mu) \Bigg)^3 \Bigg] \\
+&=\frac{1}{n^3} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)]  \label{proof_variance_term5}
+\end{align}
+Term 6
+\begin{align}
+& \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (x_j - \mu) (\bar{x} - \mu)] \\
+&=\sum_{i = 1}^{n} \sum_{j = 1}^{n} E \Bigg[(x_i - \mu)^2 (x_j - \mu) \Bigg( \Bigg( \frac{1}{n} \sum_{k=1}^n x_k \Bigg) - \mu \Bigg) \Bigg] \\
+&=\sum_{i = 1}^{n} \sum_{j = 1}^{n} E \Bigg[(x_i - \mu)^2 (x_j - \mu) \Bigg( \frac{1}{n} \sum_{k=1}^n (x_k - \mu) \Bigg) \Bigg] \\
+&=\frac{1}{n} \sum_{i = 1}^{n} \sum_{j = 1}^{n} E \Bigg[(x_i - \mu)^2 (x_j - \mu) \Bigg( \sum_{k=1}^n (x_k - \mu) \Bigg) \Bigg] \\
+&=\frac{1}{n} \sum_{i = 1}^{n} \sum_{j = 1}^{n} \sum_{k=1}^n E[(x_i - \mu)^2 (x_j - \mu) (x_k - \mu) ] \label{proof_variance_term6}
+\end{align}
+
+Substitute \ref{proof_variance_term2}, \ref{proof_variance_term3}, \ref{proof_variance_term4}, \ref{proof_variance_term5} and \ref{proof_variance_term6} into \ref{proof_variance_origin2}
+\begin{align}
+&E \Bigg[ \Bigg( \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg)^2 \Bigg] \\
+&= \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (x_j - \mu)^2] \\
+&+ n^2 \frac{1}{n^4} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)] \\
+&+4 \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)] \\
+&+2n \frac{1}{n^2} \sum_{i = 1}^{n} \sum_{j = 1}^{n} \sum_{k = 1}^{n} E[ (x_i - \mu)^2 (x_j - \mu) (x_k - \mu) ] \\
+&-4n  \frac{1}{n^3} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)] \\
+&-4 \frac{1}{n} \sum_{i = 1}^{n} \sum_{j = 1}^{n} \sum_{k=1}^n E[(x_i - \mu)^2 (x_j - \mu) (x_k - \mu) ] \\
+&= \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (x_j - \mu)^2] \\
+&- \frac{2}{n} \sum_{i = 1}^{n} \sum_{j = 1}^{n} \sum_{k=1}^n E[(x_i - \mu)^2 (x_j - \mu) (x_k - \mu) ] \\
+& + \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)] \label{proof_variance_origin3}
+\end{align}
+Term 1
+\begin{align*}
+& \sum_{i = 1}^{n} \sum_{j = 1}^{n} E[(x_i - \mu)^2 (x_j - \mu)^2] \\
+&=\sum_{i = 1}^{n} E[(x_i - \mu)^4] + \sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2 (x_j - \mu)^2]
+\end{align*}
+\begin{align*}
+& n + n (n-1) \\
+&= n^2
+\end{align*}
+Term 2
+\begin{align*}
+& \sum_{i = 1}^{n} \sum_{j = 1}^{n} \sum_{k=1}^n E[(x_i - \mu)^2 (x_j - \mu) (x_k - \mu) ] \\
+&=\sum_{i=1}^n E[(x_i - \mu)^4] \\
+&+\sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2(x_j - \mu)^2]
++2\sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)(x_j - \mu)^3] \\
+&+\sum_{\substack{\text{distinct} \\ i,j,k}} E[(x_i - \mu)^2 (x_j - \mu) (x_k - \mu)]
+\end{align*}
+\begin{align*}
+& n + n (n-1) + 2 n (n-1) + n (n-1)(n-2) \\
+&= n + 3 n (n-1) + n (n-1)(n-2) \\
+&= n + n(n-1)(n+1) \\
+&= n + n(n^2-1) \\
+&= n + n^3 - n \\
+&= n^3
+\end{align*}
+Term 3
+\begin{align*}
+& \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)] \\
+&=\sum_{i=1}^n E[(x_i - \mu)^4] \\
+&+ 3 \sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2 (x_j - \mu)^2]
+ + 4 \sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu) (x_j - \mu)^3] \\
+&+ 6 \sum_{\substack{\text{distinct} \\ i,j,k}} E[(x_i - \mu)^2 (x_j - \mu) (x_k - \mu)] \\
+&+ \sum_{\substack{\text{distinct} \\ i,j,k,l}} E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)]
+\end{align*}
+\begin{align*}
+& n + 3 n (n-1) + 4 n (n-1) + 6 n (n-1)(n-2) +  n (n-1)(n-2)(n-3) \\
+&= n + 7 n (n-1) + 6 n (n-1)(n-2) +  n (n-1)(n-2)(n-3) \\
+&= n + 7 n (n-1) + n (n-1)(n-2)(n+3) \\
+&= n + 7 n (n-1) + n (n-1)(n^2 +n -6) \\
+&= n + n (n-1)(n^2 +n +1) \\
+&= n + n (n^3 -1) \\
+&= n + n^4 -n \\
+&= n^4
+\end{align*}
+\begin{align*}
+\sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu) (x_j - \mu)^3]
+&=\sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)] E[(x_j - \mu)^3] \\
+&=\sum_{\substack{\text{distinct} \\ i,j}} 0 \cdot E[(x_j - \mu)^3] \\
+&= 0
+\end{align*}
+\begin{align*}
+\sum_{\substack{\text{distinct} \\ i,j,k}} E[(x_i - \mu)^2 (x_j - \mu) (x_k - \mu)]
+&= \sum_{\substack{\text{distinct} \\ i,j,k}} E[(x_i - \mu)^2] E[(x_j - \mu)] E[(x_k - \mu)] \\
+&= \sum_{\substack{\text{distinct} \\ i,j,k}} E[(x_i - \mu)^2] \cdot 0 \cdot 0 \\
+&= 0
+\end{align*}
+\begin{align*}
+\sum_{\substack{\text{distinct} \\ i,j,k,l}} E[(x_i - \mu)(x_j - \mu)(x_k - \mu)(x_l - \mu)]
+&= \sum_{\substack{\text{distinct} \\ i,j,k,l}} E[(x_i - \mu)] E[(x_j - \mu)] E[(x_k - \mu)] E[(x_l - \mu)] \\
+&= \sum_{\substack{\text{distinct} \\ i,j,k,l}} 0 \cdot 0 \cdot 0 \cdot 0 \\
+&= 0
+\end{align*}
+Equation \ref{proof_variance_origin3} becomes
+\begin{align*}
+E \Bigg[ \Bigg( \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg)^2 \Bigg]
+&= \sum_{i = 1}^{n} E[(x_i - \mu)^4] + \sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2 (x_j - \mu)^2] \\
+&- \frac{2}{n} \Bigg( \sum_{i=1}^n E[(x_i - \mu)^4] + \sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2(x_j - \mu)^2] \Bigg) \\
+&+ \frac{1}{n^2} \Bigg( \sum_{i=1}^n E[(x_i - \mu)^4] + 3 \sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2 (x_j - \mu)^2] \Bigg) \\
+&= \frac{n^2-2n+1}{n^2} \sum_{i = 1}^{n} E[(x_i - \mu)^4] + \frac{n^2-2n+3}{n^2} \sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2 (x_j - \mu)^2]
+\end{align*}
+\begin{align*}
+E[(x_i - \mu)^4]
+&= \int_{-\infty}^{\infty} (x - \mu)^4 P(x) dx \\
+&= \int_{-\infty}^{\infty} (x - \mu)^4 \frac{1}{\sigma \sqrt{2\pi}} \exp \Bigg[ - \frac{(x-\mu)^2}{2\sigma^2} \Bigg] dx \\
+&= \int_{-\infty}^{\infty} (x - \mu)^4 \frac{1}{\sigma \sqrt{2\pi}} \exp \Bigg[ - \Bigg( \frac{x-\mu}{\sqrt{2}\sigma} \Bigg)^2 \Bigg] dx
+\end{align*}
+\begin{align*}
+\text{Let} \qquad t &= \frac{x-\mu}{\sqrt{2}\sigma} \\
+E[(x_i - \mu)^4] &= \int_{-\infty}^{\infty} (\sqrt{2}\sigma t)^4 \frac{1}{\sigma \sqrt{2\pi}} \exp (-t^2) (\sqrt{2}\sigma dt) \\
+&= \frac{4\sigma^4}{\sqrt{\pi}} \int_{-\infty}^{\infty} t^4  e^{-t^2} dt \\
+&= -\frac{2\sigma^4}{\sqrt{\pi}} \int_{-\infty}^{\infty} t^3 (-2t e^{-t^2}) dt \\
+&= -\frac{2\sigma^4}{\sqrt{\pi}} \int_{-\infty}^{\infty} t^3 d(e^{-t^2}) \\
+&= -\frac{2\sigma^4}{\sqrt{\pi}} \Bigg( [t^3 e^{-t^2}]_{-\infty}^{\infty} -\int_{-\infty}^{\infty} 3t^2 e^{-t^2} dt \Bigg) \\
+&= \frac{6\sigma^4}{\sqrt{\pi}} \int_{-\infty}^{\infty} t^2 e^{-t^2} dt \\
+&= -\frac{3\sigma^4}{\sqrt{\pi}} \int_{-\infty}^{\infty} t (-2t e^{-t^2}) dt \\
+&= -\frac{3\sigma^4}{\sqrt{\pi}} \int_{-\infty}^{\infty} t d(e^{-t^2}) \\
+&= -\frac{3\sigma^4}{\sqrt{\pi}} \Bigg( [t e^{-t^2}]_{-\infty}^{\infty} -\int_{-\infty}^{\infty} e^{-t^2} dt \Bigg) \\
+&= \frac{3\sigma^4}{\sqrt{\pi}} \int_{-\infty}^{\infty} e^{-t^2} dt \\
+&= \frac{3\sigma^4}{\sqrt{\pi}} \sqrt{\pi} \\
+&= 3\sigma^4
+\end{align*}
+\begin{align*}
+\sum_{i = 1}^{n} E[(x_i - \mu)^4]
+&=\sum_{i = 1}^{n} 3\sigma^4 \\
+&= 3n \sigma^4
+\end{align*}
+\begin{align*}
+\sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2 (x_j - \mu)^2]
+&= \sum_{\substack{\text{distinct} \\ i,j}} E[(x_i - \mu)^2] E[(x_j - \mu)^2] \\
+&= \sum_{\substack{\text{distinct} \\ i,j}} \sigma^2 \sigma^2 \\
+&= \sum_{\substack{\text{distinct} \\ i,j}} \sigma^4 \\
+&= n(n-1) \sigma^4
+\end{align*}
+\begin{align*}
+E \Bigg[ \Bigg( \sum_{i = 1}^{n} (x_i - \bar{x})^2 \Bigg)^2 \Bigg]
+&= \frac{n^2-2n+1}{n^2} (3n \sigma^4) + \frac{n^2-2n+3}{n^2} [n(n-1) \sigma^4] \\
+&= \frac{3(n-1)^2}{n} \sigma^4 + \frac{(n^2-2n+3)(n-1)}{n} \sigma^4 \\
+&= \frac{(n-1)[(3n-3)+(n^2-2n+3)]}{n} \sigma^4 \\
+&= \frac{(n-1)(n^2+n)}{n} \sigma^4 \\
+&= (n-1)(n+1) \sigma^4 \\
+\end{align*}
+Equation \ref{proof_variance_origin1} becomes
+\begin{align*}
+\sigma_{\hat{\sigma^2}}^2
+&= \frac{1}{(n-1)^2} [ (n-1)(n+1) \sigma^4 ] - \sigma^4 \\
+&= \frac{n+1}{n-1} \sigma^4 - \sigma^4 \\
+&= \frac{[(n+1)-(n-1)]}{n-1} \sigma^4 \\
+&= \frac{2\sigma^4}{n-1}
 \end{align*}
 
 \medskip
