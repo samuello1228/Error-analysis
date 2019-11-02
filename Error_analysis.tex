@@ -471,9 +471,19 @@ The error of $\hat{\mu}$ in equation \ref{error_of_estimator_mu} can then be est
 &= \frac{1}{\sqrt{n}} \sqrt{ \frac{1}{n-1} \sum_{i = 1}^{n} (x_i - \bar{x})^2 }
 \end{align*}
 Finally, we need to calculate the error of the estimator $\hat{\sigma}^2$ defined by equation \ref{estimator_sigma_redefinition}. It is calculated in the appendix \ref{proof_variance}.
-\begin{equation*}
-\sigma_{\hat{\sigma^2}}^2 = \frac{2\sigma^4}{n-1}
-\end{equation*}
+\begin{align*}
+\sigma_{\hat{\sigma^2}}^2 &= \frac{2\sigma^4}{n-1} \\
+\sigma_{\hat{\sigma^2}} &= \sqrt{\frac{2}{n-1}} \sigma^2 \\
+\sigma_{\hat{\sigma^2}} &= \sqrt{\frac{2}{n-1}} \hat{\sigma^2}
+\end{align*}
+The error of the estimator $\hat{\sigma}$ is
+\begin{align*}
+d(x^2) &= 2x dx \\
+\sigma_{\hat{\sigma^2}} &= 2 \hat{\sigma} \sigma_{\hat{\sigma}} \\
+\sigma_{\hat{\sigma}} &= \frac{\sigma_{\hat{\sigma^2}}} {2 \hat{\sigma}} \\
+&= \frac{1}{2\hat{\sigma}} \sqrt{\frac{2}{n-1}} \hat{\sigma^2} \\
+&= \frac{\hat{\sigma}}{\sqrt{2(n-1)}}  \\
+\end{align*}
 
 \subsection{$\chi^2$ method}
 The $\chi^2$ method is useful for testing how good the fit is.
